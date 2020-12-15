@@ -1,5 +1,10 @@
 import React from "react";
+import Test from "./Test"
 
 export default function Root(props) {
-  return <section>{props.name} is mounted!</section>;
+  return (
+   
+      <Test />
+   
+  );
 }
