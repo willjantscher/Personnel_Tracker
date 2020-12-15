@@ -1,5 +1,5 @@
 {
-  "name": "@team6/personnelTracker",
+  "name": "@scorp/pcs",
   "scripts": {
     "start": "webpack-dev-server",
     "start:standalone": "webpack-dev-server --env.standalone",
