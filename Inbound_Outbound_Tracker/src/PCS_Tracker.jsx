@@ -1,4 +1,4 @@
-import react from "React";
+import React from "react";
 
 class PCS_Tracker extends React.Component{
     constructor(props){
@@ -36,6 +36,9 @@ class PCS_Tracker extends React.Component{
         }
     }
 
+    /*render(){
+        return (<div><h1>hello</h1></div>);
+    }*/
 
     render(){
         return(
@@ -43,9 +46,12 @@ class PCS_Tracker extends React.Component{
                     <div className="row text-center mt-3">
                     <div className="col-md-6">
                         <h3>Inbounds/Outbounds</h3>
-                    </div>        
+                    </div>                        
                     </div>
                     <br />
+                    <div>
+                        <h4>Inbounds</h4>
+                    </div>
                     <div className="row">
                     <table className="table table-striped table-bordered table-hover">
                         <thead>
@@ -63,6 +69,31 @@ class PCS_Tracker extends React.Component{
                             <td> {inbounds.firstName} </td>
                             <td> {inbounds.lastName} </td>
                             <td> {inbounds.RNLTD}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                    </div>
+                    <div>
+                        <h4>Outbounds</h4>
+                    </div>
+                    <div className="row">
+                    <table className="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Rank</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Departure Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.outbounds.map((outbounds) => (
+                            <tr>
+                            <td> {outbounds.rank} </td>
+                            <td> {outbounds.firstName} </td>
+                            <td> {outbounds.lastName} </td>
+                            <td> {outbounds.departureDate}</td>
                             </tr>
                         ))}
                         </tbody>
