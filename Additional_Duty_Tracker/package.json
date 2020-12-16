@@ -1,15 +1,26 @@
 {
-  "name": "@scorp/tracker",
+  "name": "@team-6/additional-duty-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --port 9002",
+    "test": "cross-env BABEL_ENV=test jest",
+    "start": "webpack-dev-server",
     "start:standalone": "webpack-dev-server --env.standalone",
     "build": "webpack --mode=production",
     "analyze": "webpack --mode=production --env.analyze=true",
     "lint": "eslint src --ext js",
     "format": "prettier --write \"./**\"",
-    "test": "cross-env BABEL_ENV=test jest",
     "watch-tests": "cross-env BABEL_ENV=test jest --watch",
     "coverage": "cross-env BABEL_ENV=test jest --coverage"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "create-single-spa": "^1.18.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "husky": {
     "hooks": {
@@ -46,9 +57,5 @@
     "webpack-config-single-spa-react": "^1.0.3",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2"
-  },
-  "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
   }
 }
