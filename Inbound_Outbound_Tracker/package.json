@@ -1,7 +1,7 @@
 {
   "name": "@scorp/pcs",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --port 9003",
     "start:standalone": "webpack-dev-server --env.standalone",
     "build": "webpack --mode=production",
     "analyze": "webpack --mode=production --env.analyze=true",

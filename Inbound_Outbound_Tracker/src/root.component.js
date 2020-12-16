@@ -1,6 +1,7 @@
 import React from "react";
+import Test from "./PCS_Tracker.jsx"
 
 export default function Root(props) {
-  return <section>{props.name} is mounted!</section>;
-  //return <section>Class goes here!</section>
+  return <PCS_Tracker />;
 }
+

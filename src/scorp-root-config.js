@@ -10,6 +10,11 @@ registerApplication({
   app: () => System.import("@scorp/main-page"),
   activeWhen: ["/main"],
 });
+registerApplication({
+  name: "@scorp/pcs",
+  app: () => System.import("@scorp/pcs"),
+  activeWhen: ["/pcs"],
+});
 
 // registerApplication({
 //   name: "@scorp/navbar",
