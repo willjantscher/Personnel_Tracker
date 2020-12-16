@@ -3,7 +3,7 @@ import { registerApplication, start } from "single-spa";
 registerApplication({
   name: "@scorp/tracker",
   app: () => System.import("@scorp/tracker"),
-  activeWhen: ["/"],
+  activeWhen: ["/opr_epr"],
 });
 
 // registerApplication({
