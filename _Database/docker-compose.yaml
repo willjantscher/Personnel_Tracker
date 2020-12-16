@@ -1,0 +1,23 @@
+---
+version: "3.2"
+services:
+  users-db:
+    image: mysql:8
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+
+      - users-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: personneltrackerdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+volumes:
+  users-data:
+    driver: local
+# docker-compose up
+# docker-compose down -v
+
