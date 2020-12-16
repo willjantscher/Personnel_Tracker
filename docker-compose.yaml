@@ -1,0 +1,9 @@
+version: '3.1'
+
+services: 
+  opr_epr_tracker:
+    build: OPR_EPR_TRACKER
+    ports:
+      - 9002:9002
+
+  
