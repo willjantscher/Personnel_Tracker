@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AdditionalDutyService from '../services/AdditionalDutyService'
 
 class Table extends Component {
   constructor(props) {
@@ -32,12 +33,16 @@ class Table extends Component {
         },
       ],
     };
+
+    // this.addDuty = this.addDuty.bind(this);
+    // this.editDuty = this.editDuty.bind(this);
+    // this.deleteDuty = this.deleteDuty.bind(this);
   }
 
   render() {
     return (
       <div className="container">
-        <div className="row text-center mt-3">
+        <div className="row text-center mt-4">
           <div className="col-md-6">
             <h3>Additional Duties Roster</h3>
           </div>
@@ -52,7 +57,6 @@ class Table extends Component {
               </button>
               &nbsp;
               <button className="btn btn-sm btn-success" onClick={this.addDuty}>
-                {" "}
                 Add Additional Duty
               </button>
             </h3>
@@ -67,6 +71,7 @@ class Table extends Component {
                 <th scope="col">Rank</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -79,6 +84,10 @@ class Table extends Component {
                   <td> {duty.rank} </td>
                   <td> {duty.firstName} </td>
                   <td> {duty.lastName}</td>
+                  <td>
+                    <button onClick={ () => this.editDuty(duty.id)} className="btn btn-sm btn-success">Edit </button>&nbsp;
+                    <button onClick={ () => this.deleteDuty(duty.id)} className="btn btn-sm btn-danger">Delete </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
