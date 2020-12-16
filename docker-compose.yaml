@@ -1,9 +1,27 @@
-version: '3.1'
+version: "3.2"
 
-services: 
+services:
+  single_spa_root:
+    build: ./
+    ports:
+      - 9000:9000
+
   opr_epr_tracker:
     build: OPR_EPR_TRACKER
     ports:
       - 9002:9002
 
-  
+  main_page:
+    build: Main_Page
+    ports:
+      - 9001:9001
+
+  inbound_outbound_tracker:
+    build: Inbound_Outbound_Tracker
+    ports:
+      - 9003:9003
+
+  additional_duty_tracker:
+    build: Additional_Duty_Tracker
+    ports:
+      - 9004:9004
