@@ -1,7 +1,7 @@
 {
   "name": "@scorp/root-config",
   "scripts": {
-    "start": "webpack-dev-server --mode=development --port 9000 --env.isLocal=true",
+    "start": "webpack-dev-server --mode=development --host 0.0.0.0 --port 9000 --env.isLocal=true",
     "lint": "eslint src --ext js",
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
     "format": "prettier --write \"./**\"",

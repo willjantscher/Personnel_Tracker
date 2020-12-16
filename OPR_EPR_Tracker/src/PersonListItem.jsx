@@ -1,10 +1,7 @@
-import react from "React";
+import React from "react";
 
-function await PersonListItem(){
-
-
-
-    return (
-        
-    )
+function PersonListItem() {
+  return <div></div>;
 }
+
+export default PersonListItem;
