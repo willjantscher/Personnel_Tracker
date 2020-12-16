@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AdditionalDutyService from '../services/AdditionalDutyService'
 
 class Table extends Component {
   constructor(props) {
@@ -32,6 +33,10 @@ class Table extends Component {
         },
       ],
     };
+
+    // this.addDuty = this.addDuty.bind(this);
+    // this.editDuty = this.editDuty.bind(this);
+    // this.deleteDuty = this.deleteDuty.bind(this);
   }
 
   render() {
@@ -52,7 +57,6 @@ class Table extends Component {
               </button>
               &nbsp;
               <button className="btn btn-sm btn-success" onClick={this.addDuty}>
-                {" "}
                 Add Additional Duty
               </button>
             </h3>
@@ -83,7 +87,7 @@ class Table extends Component {
                   <td>
                     <button onClick={ () => this.editDuty(duty.id)} className="btn btn-sm btn-success">Edit </button>&nbsp;
                     <button onClick={ () => this.deleteDuty(duty.id)} className="btn btn-sm btn-danger">Delete </button>
-                </td>
+                  </td>
                 </tr>
               ))}
             </tbody>

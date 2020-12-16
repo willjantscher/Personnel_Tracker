@@ -1,7 +1,7 @@
 {
-  "name": "@scorp/tracker",
+  "name": "@scorp/main-page",
   "scripts": {
-    "start": "webpack-dev-server --port 9002",
+    "start": "webpack-dev-server --port 9001",
     "start:standalone": "webpack-dev-server --env.standalone",
     "build": "webpack --mode=production",
     "analyze": "webpack --mode=production --env.analyze=true",
