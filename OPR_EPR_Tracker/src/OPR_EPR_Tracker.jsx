@@ -9,9 +9,7 @@ class OPR_EPR_Tracker extends React.Component {
   render() {
     return (
       <div>
-        <ol>
-          <PersonListItem />
-        </ol>
+        <PersonListItem />
       </div>
     );
   }
