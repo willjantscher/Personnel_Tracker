@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class Navbar extends Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             Personnel Tracker
@@ -23,7 +23,7 @@ class Navbar extends Component {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <a className="nav-link" href="#">
-                  Member List
+                  All Members
                 </a>
               </li>
               <li className="nav-item">
@@ -33,7 +33,7 @@ class Navbar extends Component {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
-                  Additional Duty Roster
+                  Additional Duties
                 </a>
               </li>
             </ul>
