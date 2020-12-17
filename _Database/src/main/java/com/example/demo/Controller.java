@@ -1,5 +1,7 @@
 package com.example.demo;
 //./gradlew bootRun
+//docker-compose up
+//docker-compose down -v
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
