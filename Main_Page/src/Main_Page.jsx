@@ -66,7 +66,23 @@ class AlphaRoster extends Component {
   generateTable() {
     let table = this.state.members.map((member) => {
       {
-        if (member.opr_epr_status === 0) {
+        var assignment = "";
+        if (member.has_assignment === 0) {
+          assignment = "----------";
+        } else {
+          assignment = "Assigned";
+        }
+        var birthday = "";
+        var arrival_date = "";
+        var departure_date = "";
+        if (member.birthday) {
+          birthday = member.birthday.substring(0, 10);
+        }
+        if (member.arrival_date) {
+          arrival_date = member.arrival_date.substring(0, 10);
+        }
+        if (member.departure_date) {
+          departure_date = member.departure_date.substring(0, 10);
         }
       }
       return (
@@ -74,14 +90,15 @@ class AlphaRoster extends Component {
           <td>{member.paygrade}</td>
           <td>{member.first_name}</td>
           <td>{member.last_name}</td>
-          <td>{member.birthday}</td>
-          <td>{member.has_assignment}</td>
-          <td>{member.arrival_date}</td>
-          <td>{member.departure_date}</td>
+          <td>{birthday}</td>
+          <td>{assignment}</td>
+          <td>{arrival_date}</td>
+          <td>{departure_date}</td>
           <td>{member.opr_epr_status}</td>
         </tr>
       );
     });
+
     return (
       <table>
         <thead>
