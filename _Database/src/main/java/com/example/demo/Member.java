@@ -12,6 +12,16 @@ public class Member {
 
     private String first_name;
     private String last_name;
+    private String paygrade;
+
+    public String getPaygrade() {
+        return paygrade;
+    }
+
+    public void setPaygrade(String paygrade) {
+        this.paygrade = paygrade;
+    }
+
     private Date birthday;
     private Date arrival_date;
     private Date departure_date;
@@ -88,6 +98,7 @@ public class Member {
                 "member_id=" + member_id +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
+                ", paygrade='" + paygrade + '\'' +
                 ", birthday=" + birthday +
                 ", arrival_date=" + arrival_date +
                 ", departure_date=" + departure_date +
