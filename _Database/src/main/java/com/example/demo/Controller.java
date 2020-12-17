@@ -6,9 +6,13 @@ package com.example.demo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Map;
 import java.util.Set;
 
+=======
+@CrossOrigin
+>>>>>>> main
 @RestController
 @CrossOrigin
 public class Controller {
@@ -60,10 +64,20 @@ public class Controller {
         return additionalDuty;
     }
 
+<<<<<<< HEAD
     @GetMapping("/duties/unassigned")
     public Iterable<AdditionalDuty> unassignedDuties() {
         Iterable<AdditionalDuty> output = this.additionalDutyRepository.findUnassigned();
         return output;
+=======
+//    main page mapping
+
+    //    main page mapping
+    @PostMapping("/members/add-member")
+    public Member addMember (@RequestBody Member member) {
+        this.memberRepository.save(member);
+        return member;
+>>>>>>> main
     }
 
     @DeleteMapping("/duties/{duty_id}")
