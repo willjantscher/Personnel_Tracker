@@ -6,22 +6,11 @@ import {
   Route,
 } from "react-router-dom";
 import Add_Member from "./Add_Member";
+import Search_Member from "./Search_Member";
 
 class Main_Page extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   member: {
-    //     paygrade: "",
-    //     first_name: "",
-    //     last_name: "",
-    //     birthday: "",
-    //     has_assignment: "",
-    //     arrival_date: "",
-    //     departure_date: "",
-    //     opr_epr_status: "due now"
-    //   },
-    // };
   }
 
   render() {
@@ -34,14 +23,61 @@ class Main_Page extends React.Component {
         <Link to={"/main/Add_Member"}>
           <div>Add a Member</div>
         </Link>
+        <Link to={"/main/SearchMember"}>
+          <div>Search for a Member and edit their data</div>
+        </Link>
         <Link to={"/main/Alpha_Roster"}>
           <div>Generate Alpha Roster</div>
         </Link>
 
+        <Route path="/main/SearchMember" component={SearchMember} />
         <Route path="/main/Alpha_Roster" component={AlphaRoster} />
         <Route path="/main/Add_Member" component={AddMember} />
       </Router>
     );
+  }
+}
+
+class SearchMember extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      members: [{}],
+    };
+  }
+  componentDidMount() {
+    fetch("http://localhost:8080/members", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data)
+        this.setState({ members: data });
+      });
+  }
+
+  render() {
+    return (
+      <div>
+        Select a member to see their data
+        <Search_Member members={this.state.members} />
+        <Link to={"/main/SearchMember/EditMember"}>
+          <div>Edit a member</div>
+        </Link>
+        <Route path="/main/SearchMember/EditMember" component={EditMember} />
+      </div>
+    );
+  }
+}
+
+class EditMember extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return <div>Inside of the Edit Member component</div>;
   }
 }
 
@@ -100,33 +136,29 @@ class AlphaRoster extends Component {
     });
 
     return (
-      <table>
-        <thead>
-          <h2>Alpha Roster</h2>
-          <tr>
-            <td>Rank</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Date of Birth</td>
-            <td>Assignment Status</td>
-            <td>Arrival Date</td>
-            <td>Departure Date</td>
-            <td>Opr/EPR Status</td>
-          </tr>
-        </thead>
-        <tbody>{table}</tbody>
-      </table>
+      <div>
+        <h1>Alpha Roster</h1>
+        <table>
+          <thead>
+            <tr>
+              <td>Rank</td>
+              <td>First Name</td>
+              <td>Last Name</td>
+              <td>Date of Birth</td>
+              <td>Assignment Status</td>
+              <td>Arrival Date</td>
+              <td>Departure Date</td>
+              <td>Opr/EPR Status</td>
+            </tr>
+          </thead>
+          <tbody>{table}</tbody>
+        </table>
+      </div>
     );
   }
 
   render() {
-    return (
-      <div>
-        {this.generateTable()}
-        <div>You are now seeing the Alpha Roster ooooo</div>
-        {this.state.members[0].last_name}
-      </div>
-    );
+    return <div>{this.generateTable()}</div>;
   }
 }
 
@@ -235,9 +267,5 @@ class AddMember extends Component {
     );
   }
 }
-
-const MemberAdded = () => {
-  return <div>Member added Successfully!</div>;
-};
 
 export default Main_Page;
