@@ -5,18 +5,11 @@ package com.example.demo;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Map;
-import java.util.Set;
 
-=======
-@CrossOrigin
->>>>>>> main
 @RestController
 @CrossOrigin
 public class Controller {
-
 
     private final MemberRepository memberRepository;
     private final AdditionalDutyRepository additionalDutyRepository;
@@ -64,20 +57,10 @@ public class Controller {
         return additionalDuty;
     }
 
-<<<<<<< HEAD
     @GetMapping("/duties/unassigned")
     public Iterable<AdditionalDuty> unassignedDuties() {
         Iterable<AdditionalDuty> output = this.additionalDutyRepository.findUnassigned();
         return output;
-=======
-//    main page mapping
-
-    //    main page mapping
-    @PostMapping("/members/add-member")
-    public Member addMember (@RequestBody Member member) {
-        this.memberRepository.save(member);
-        return member;
->>>>>>> main
     }
 
     @DeleteMapping("/duties/{duty_id}")
@@ -86,8 +69,7 @@ public class Controller {
         return "Deleted additional duty";
     }
 
-//
-//    @PatchMapping("/duties/{duty_id}")
+    //    @PatchMapping("/duties/{duty_id}")
 //    public AdditionalDuty editDuty(@RequestBody AdditionalDuty input, @PathVariable Long duty_id) {
 //        AdditionalDuty editThis = this.additionalDutyRepository.findById(duty_id).get();
 //        editThis.setDuty_id(input.getDuty_id());
@@ -96,6 +78,14 @@ public class Controller {
 //        editThis.setWorkload(input.getWorkload());
 //        return this.additionalDutyRepository.save(editThis);
 //    }
+
+
+    //    main page mapping
+    @PostMapping("/members/add-member")
+    public Member addMember (@RequestBody Member member) {
+        this.memberRepository.save(member);
+        return member;
+    }
 
 //    Inbound_Outbound_Tracker mapping
 

@@ -2,10 +2,8 @@ package com.example.demo;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
 import java.util.Map;
-import java.util.Set;
 
 public interface AdditionalDutyRepository extends CrudRepository<AdditionalDuty, Long > {
 
