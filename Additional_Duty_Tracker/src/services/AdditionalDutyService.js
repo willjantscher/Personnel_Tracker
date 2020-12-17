@@ -11,6 +11,10 @@ class AdditionalDutyService {
     return axios.get(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId);
   }
 
+  getUnassignedDuties() {
+    return axios.get(ADDITIONAL_DUTY_API_BASE_URL + "/unassigned");
+  }
+
   // createDuty(duty) {
   //   return axios.post(ADDITIONAL_DUTY_API_BASE_URL, duty);
   // }

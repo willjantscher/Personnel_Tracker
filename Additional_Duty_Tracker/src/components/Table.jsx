@@ -1,46 +1,34 @@
 import React, { Component } from "react";
 import AdditionalDutyService from "../services/AdditionalDutyService";
+import EditForm from "./EditForm";
 
 class Table extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      duties: [
-        // {
-        //   name: "Clothing Monitor",
-        //   rank: "TSgt",
-        //   firstName: "Richard",
-        //   lastName: "Schafer",
-        // },
-        // {
-        //   name: "UHM",
-        //   rank: "TSgt",
-        //   firstName: "Matthew",
-        //   lastName: "Otto",
-        // },
-        // {
-        //   name: "Resource Advisor",
-        //   rank: "Maj",
-        //   firstName: "Chad",
-        //   lastName: "Evans",
-        // },
-        // {
-        //   name: "Security Manager",
-        //   rank: null,
-        //   firstName: null,
-        //   lastName: null,
-        // },
-      ],
+      duties: [],
     };
 
     // this.addDuty = this.addDuty.bind(this);
-    // this.editDuty = this.editDuty.bind(this);
+    this.editDuty = this.editDuty.bind(this);
     this.deleteDuty = this.deleteDuty.bind(this);
+    this.viewAll = this.viewAll.bind(this);
+    this.viewUnassigned = this.viewUnassigned.bind(this);
   }
 
   componentDidMount() {
     AdditionalDutyService.getDuties().then((res) => {
+      this.setState({ duties: res.data });
+    });
+  }
+
+  viewAll() {
+    this.componentDidMount();
+  }
+
+  viewUnassigned() {
+    AdditionalDutyService.getUnassignedDuties().then((res) => {
       this.setState({ duties: res.data });
     });
   }
@@ -53,6 +41,10 @@ class Table extends Component {
     });
   }
 
+  editDuty(id) {
+    return <EditForm duty_id="id" />;
+  }
+
   render() {
     return (
       <div className="container">
@@ -62,11 +54,14 @@ class Table extends Component {
           </div>
           <div className="col-md-6">
             <h3>
+              <button className="btn btn-sm btn-primary" onClick={this.viewAll}>
+                View All
+              </button>
+              &nbsp;
               <button
-                className="btn btn-sm btn-primary"
+                className="btn btn-sm btn-danger"
                 onClick={this.viewUnassigned}
               >
-                {" "}
                 View Unassigned
               </button>
               &nbsp;
@@ -98,8 +93,10 @@ class Table extends Component {
                   <td> {duty.workload} </td>
                   <td>
                     <button
-                      onClick={() => this.editDuty(duty.duty_id)}
+                      data-bs-toggle="modal"
+                      data-bs-target="#editModal"
                       className="btn btn-sm btn-success"
+                      onClick={() => this.editDuty(duty.duty_id)}
                     >
                       Edit
                     </button>
