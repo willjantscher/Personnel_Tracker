@@ -71,5 +71,5 @@ dist
 *.sw?
 .DS_Store
 
-_Database/.gradle
+_Database/.gradle/
 _Database/build/
