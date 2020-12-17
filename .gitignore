@@ -72,4 +72,4 @@ dist
 .DS_Store
 
 _Database/.gradle
-build/
+_Database/build/
