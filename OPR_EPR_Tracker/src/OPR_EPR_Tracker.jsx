@@ -19,10 +19,17 @@ class OPR_EPR_Tracker extends React.Component {
       .then((data) => this.setState({ members: data }));
   }
 
+  handleOnchangeStatus(e) {
+    let status = e.target.value;
+  }
+
   render() {
     return (
       <div>
-        <PersonListItem members={this.state.members} />
+        <PersonListItem
+          members={this.state.members}
+          onChange={this.handleOnchangeStatus}
+        />
       </div>
     );
   }
