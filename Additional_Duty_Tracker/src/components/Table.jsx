@@ -53,6 +53,16 @@ class Table extends Component {
     this.setState({ showEditModal: false });
   }
 
+  colorizeRow(duty) {
+      if (!duty.last_name) {
+        return "table-danger"
+      } else if (duty.has_assignment === 1) {
+        return "table-warning"
+      } else {
+        return "table-success"
+      } 
+  }
+
   render() {
     return (
       <div className="container">
@@ -84,7 +94,7 @@ class Table extends Component {
           <table className="table table-striped table-bordered table-hover">
             <thead>
               <tr>
-                <th scope="col">Title</th>
+                <th scope="col">Duty Title</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Rank</th>
@@ -96,8 +106,7 @@ class Table extends Component {
               {this.state.duties.map((duty) => (
                 <tr
                   key={duty.id}
-                  className={!duty.last_name ? "table-danger" : ""}
-                >
+                  className={this.colorizeRow(duty)}>
                   <td> {duty.title} </td>
                   <td> {duty.last_name} </td>
                   <td> {duty.first_name} </td>
