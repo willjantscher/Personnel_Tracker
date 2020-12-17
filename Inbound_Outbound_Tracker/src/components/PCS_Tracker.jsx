@@ -8,7 +8,7 @@ class PCS_Tracker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      memberList: [],
+      memberList: [{}],
       inbounds: [
         {
           firstName: "Aria",
@@ -40,8 +40,19 @@ class PCS_Tracker extends React.Component {
     };
   }
 
+  componentDidMount() {
+    fetch("http://localhost:8080/members", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(data)
+        this.setState({ memberList: data}, () => console.log(this.state.memberList));
+      });
+  }
 
-  async componentDidMount(){
+
+  /*async componentDidMount(){
     const memberList = await this.getMemberList();
     this.setState({memberList : memberList});
   }
@@ -50,7 +61,7 @@ class PCS_Tracker extends React.Component {
     const response = await fetch ('http://localhost:8080/members');
     const json = await response.json();
     return json;
-  }
+  }*/
 
   render() {
     return (
@@ -110,7 +121,7 @@ class PCS_Tracker extends React.Component {
               ))}
             </tbody>
           </table>
-          <ListMembers memberList = {this.state.memberList}/>
+          <ListMembers memberList = {this.state.memberList[0].first_name}/>
         </div>
       </div>
     );
