@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Redirect,
+  Route,
+} from "react-router-dom";
 import Add_Member from "./Add_Member";
 
 class Main_Page extends React.Component {
@@ -19,44 +24,51 @@ class Main_Page extends React.Component {
     // };
   }
 
-  handleAddMember = (e) => {
-    e.preventDefault();
-    console.log("add member called");
-  };
-
   render() {
     return (
       <Router>
         <h1>Welcome to the page</h1>
-
+        <Link to={"/main"}>
+          <div>Home</div>
+        </Link>
         <Link to={"/main/Add_Member"}>
           <div>Add a Member</div>
         </Link>
+        <Link to={"/main/Alpha_Roster"}>
+          <div>Generate Alpha Roster</div>
+        </Link>
 
-        {/* create links that will go to a path that is caught by the route path */}
-        {/* <Link to={"/main/test1"}>
-          <div>link to test1</div>
-        </Link> */}
-        {/*         
-        <Link to={"/main/test2"}>
-          <div>link to test2</div>
-        </Link> */}
-
-        <Route
-          path="/main/Add_Member"
-          component={AddMember}
-          state={this.state}
-        />
-        {/* <AddMember state={this.state}></AddMember> */}
-        {/* <Route path="/main/test1" component={Test1} />
-        <Route path="/main/test2" component={Test2} /> */}
-        {/* <Route
-          exact={true}
-          path="/main"
-          render={() => <h1>Welcome to exact path</h1>}
-        /> */}
-        {/* create routes for the different links */}
+        <Route path="/main/Alpha_Roster" component={AlphaRoster} />
+        <Route path="/main/Add_Member" component={AddMember} />
       </Router>
+    );
+  }
+}
+
+class AlphaRoster extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      members: [{}],
+    };
+  }
+  componentDidMount() {
+    fetch("http://localhost:8080/members", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data)
+        this.setState({ members: data });
+      });
+  }
+
+  render() {
+    return (
+      <div>
+        <div>You are now seeing the Alpha Roster ooooo</div>
+        {this.state.members[0].last_name}
+      </div>
     );
   }
 }
@@ -67,39 +79,96 @@ class AddMember extends Component {
     super(props);
     this.state = {
       member: {
-        paygrade: "E1",
-        first_name: "will",
-        last_name: "",
-        birthday: "",
-        has_assignment: "",
-        arrival_date: "",
-        departure_date: "",
-        opr_epr_status: "",
+        paygrade: null,
+        first_name: null,
+        last_name: null,
+        birthday: null,
+        has_assignment: null,
+        arrival_date: null,
+        departure_date: null,
+        opr_epr_status: "Not Due",
       },
+      postedMember: {},
+      Request: "pending",
     };
   }
 
+  handleInputChange = (e) => {
+    e.preventDefault;
+    let tempMember = this.state.member;
+    tempMember[e.target.id] = e.target.value;
+    this.setState({ member: tempMember });
+    // console.log('input change called ' + this.state.member[e.target.id] )
+  };
+
+  async postUser() {
+    await fetch("http://localhost:8080/members/add-member", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.state.member),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data)
+        this.setState({ postedMember: data }, () =>
+          console.log(
+            this.state.postedMember.first_name +
+              " has been added to the database"
+          )
+        );
+        // console.log(data.status)
+        if (data.status === 500) {
+          this.setState({ Request: "bad" });
+        } else {
+          this.setState({ Request: "good" });
+        }
+      });
+  }
+
+  handleAddMember = (e) => {
+    e.preventDefault();
+    this.postUser();
+    // this.setState({ member : {} });
+  };
+
   render() {
     // console.log(this.state);
-    return <Add_Member onAddMember={this.handleAddMember} />;
+    return (
+      <Router>
+        <Add_Member
+          onAddMember={this.handleAddMember}
+          onInputChange={this.handleInputChange}
+        />
+        {(() => {
+          switch (this.state.Request) {
+            case "good":
+              return (
+                // <Redirect to="/main"/>
+                <div>
+                  {this.state.postedMember.first_name} has been added to the
+                  database
+                </div>
+              );
+            case "bad":
+              return (
+                <div>
+                  ERROR! You must specify a first and last name as well as an
+                  assignment status.
+                </div>
+              );
+            default:
+              return <div></div>;
+          }
+        })()}
+      </Router>
+    );
   }
-  // return <Add_Member
-  //   onAddMember={this.handleAddMember}
-  // />;
 }
 
-//this will test a query to the database in the spring environment
-// const Test1 = () => {
-//   fetch("/localhost:port/omepathstuffhere")
-//     .then((res) => res.json)
-//     .then((res) => {
-//       console.log(res);
-//     });
-//   return <div>something in test1</div>;
-// };
-
-// const Test2 = () => {
-//   return <div>something in test 2 hello there</div>;
-// };
+const MemberAdded = () => {
+  return <div>Member added Successfully!</div>;
+};
 
 export default Main_Page;

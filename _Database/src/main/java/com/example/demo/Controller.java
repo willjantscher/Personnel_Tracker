@@ -3,12 +3,10 @@ package com.example.demo;
 //docker-compose up
 //docker-compose down -v
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-
+@CrossOrigin
 @RestController
 public class Controller {
 
@@ -51,6 +49,12 @@ public class Controller {
 
 //    main page mapping
 
+    //    main page mapping
+    @PostMapping("/members/add-member")
+    public Member addMember (@RequestBody Member member) {
+        this.memberRepository.save(member);
+        return member;
+    }
 
 //    Additional_Duty_Tracker mapping
 

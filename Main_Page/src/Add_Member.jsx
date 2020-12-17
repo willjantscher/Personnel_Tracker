@@ -75,6 +75,7 @@ const Add_Member = (props) => {
           <span>Has Assignment</span>
           <input
             id="has_assignment"
+            value="0"
             onChange={props.onInputChange}
             type="radio"
             name="hasAssignment"
@@ -82,6 +83,7 @@ const Add_Member = (props) => {
           <span>Yes</span>
           <input
             id="no_assignment"
+            value="1"
             onChange={props.onInputChange}
             type="radio"
             name="hasAssignment"
