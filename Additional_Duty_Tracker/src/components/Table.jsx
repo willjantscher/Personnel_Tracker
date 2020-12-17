@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AdditionalDutyService from "../services/AdditionalDutyService";
-import EditForm from "./EditForm";
+import EditModal from "./EditModal";
 
 class Table extends Component {
   constructor(props) {
@@ -8,17 +8,21 @@ class Table extends Component {
 
     this.state = {
       duties: [],
+      showEditModal: false,
+      edit_id: null,
     };
 
     // this.addDuty = this.addDuty.bind(this);
-    this.editDuty = this.editDuty.bind(this);
+    // this.editDuty = this.editDuty.bind(this);
     this.deleteDuty = this.deleteDuty.bind(this);
     this.viewAll = this.viewAll.bind(this);
     this.viewUnassigned = this.viewUnassigned.bind(this);
+    this.showEditModal = this.showEditModal.bind(this);
+    this.hideEditModal = this.hideEditModal.bind(this);
   }
 
   componentDidMount() {
-    AdditionalDutyService.getDuties().then((res) => {
+    AdditionalDutyService.getDutiesDetails().then((res) => {
       this.setState({ duties: res.data });
     });
   }
@@ -41,8 +45,12 @@ class Table extends Component {
     });
   }
 
-  editDuty(id) {
-    return <EditForm duty_id="id" />;
+  showEditModal(id) {
+    this.setState({ showEditModal: true, edit_id: id });
+  }
+
+  hideEditModal() {
+    this.setState({ showEditModal: false });
   }
 
   render() {
@@ -77,7 +85,9 @@ class Table extends Component {
             <thead>
               <tr>
                 <th scope="col">Title</th>
-                <th scope="col">Member</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Rank</th>
                 <th scope="col">Workload</th>
                 <th scope="col"></th>
               </tr>
@@ -86,20 +96,27 @@ class Table extends Component {
               {this.state.duties.map((duty) => (
                 <tr
                   key={duty.id}
-                  className={!duty.member_id ? "table-danger" : ""}
+                  className={!duty.last_name ? "table-danger" : ""}
                 >
                   <td> {duty.title} </td>
-                  <td> {duty.member_id} </td>
+                  <td> {duty.last_name} </td>
+                  <td> {duty.first_name} </td>
+                  <td> {duty.paygrade} </td>
                   <td> {duty.workload} </td>
                   <td>
                     <button
                       data-bs-toggle="modal"
                       data-bs-target="#editModal"
                       className="btn btn-sm btn-success"
-                      onClick={() => this.editDuty(duty.duty_id)}
+                      onClick={this.showModal}
                     >
                       Edit
                     </button>
+                    <EditModal
+                      id={this.edit_id}
+                      show={this.state.show}
+                      handleClose={this.hideModal}
+                    />
                     &nbsp;
                     <button
                       onClick={() => this.deleteDuty(duty.duty_id)}

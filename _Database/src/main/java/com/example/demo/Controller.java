@@ -6,6 +6,8 @@ package com.example.demo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @CrossOrigin
@@ -43,6 +45,12 @@ public class Controller {
     @GetMapping("/duties")
     public Iterable<AdditionalDuty> duties() {
         Iterable<AdditionalDuty> output = this.additionalDutyRepository.findAll();
+        return output;
+    }
+
+    @GetMapping("/duties/details")
+    public Iterable<Map> dutiesDetails() {
+        Iterable<Map> output = this.additionalDutyRepository.findAllDetails();
         return output;
     }
 

@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import AdditionalDutyService from "../services/AdditionalDutyService";
 
-class EditForm extends Component {
+class EditModal extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      id: props.duty_id,
+      id: props.edit_id,
     };
+
+    this.submitEditDuty = this.submitEditDuty.bind(this);
   }
 
   submitEditDuty(id) {
@@ -38,13 +40,14 @@ class EditForm extends Component {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
+                onClick={this.handleClose}
               >
                 Close
               </button>
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => this.editDuty(duty.duty_id)}
+                onClick={() => this.submitEditDuty(duty.duty_id)}
               >
                 Save changes
               </button>
@@ -56,4 +59,4 @@ class EditForm extends Component {
   }
 }
 
-export default EditForm;
+export default EditModal;

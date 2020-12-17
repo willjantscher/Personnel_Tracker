@@ -7,6 +7,10 @@ class AdditionalDutyService {
     return axios.get(ADDITIONAL_DUTY_API_BASE_URL);
   }
 
+  getDutiesDetails() {
+    return axios.get(ADDITIONAL_DUTY_API_BASE_URL + "/details");
+  }
+
   getDutyById(dutyId) {
     return axios.get(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId);
   }
