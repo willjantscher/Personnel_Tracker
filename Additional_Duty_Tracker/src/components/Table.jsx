@@ -7,36 +7,50 @@ class Table extends Component {
 
     this.state = {
       duties: [
-        {
-          name: "Clothing Monitor",
-          rank: "TSgt",
-          firstName: "Richard",
-          lastName: "Schafer",
-        },
-        {
-          name: "UHM",
-          rank: "TSgt",
-          firstName: "Matthew",
-          lastName: "Otto",
-        },
-        {
-          name: "Resource Advisor",
-          rank: "Maj",
-          firstName: "Chad",
-          lastName: "Evans",
-        },
-        {
-          name: "Security Manager",
-          rank: null,
-          firstName: null,
-          lastName: null,
-        },
+        // {
+        //   name: "Clothing Monitor",
+        //   rank: "TSgt",
+        //   firstName: "Richard",
+        //   lastName: "Schafer",
+        // },
+        // {
+        //   name: "UHM",
+        //   rank: "TSgt",
+        //   firstName: "Matthew",
+        //   lastName: "Otto",
+        // },
+        // {
+        //   name: "Resource Advisor",
+        //   rank: "Maj",
+        //   firstName: "Chad",
+        //   lastName: "Evans",
+        // },
+        // {
+        //   name: "Security Manager",
+        //   rank: null,
+        //   firstName: null,
+        //   lastName: null,
+        // },
       ],
     };
 
     // this.addDuty = this.addDuty.bind(this);
     // this.editDuty = this.editDuty.bind(this);
-    // this.deleteDuty = this.deleteDuty.bind(this);
+    this.deleteDuty = this.deleteDuty.bind(this);
+  }
+
+  componentDidMount() {
+    AdditionalDutyService.getDuties().then((res) => {
+      this.setState({ duties: res.data });
+    });
+  }
+
+  deleteDuty(id) {
+    AdditionalDutyService.deleteDuty(id).then((res) => {
+      this.setState({
+        duties: this.state.duties.filter((duty) => duty.duty_id !== id),
+      });
+    });
   }
 
   render() {
@@ -67,10 +81,9 @@ class Table extends Component {
           <table className="table table-striped table-bordered table-hover">
             <thead>
               <tr>
-                <th scope="col">Additional Duty</th>
-                <th scope="col">Rank</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
+                <th scope="col">Title</th>
+                <th scope="col">Member</th>
+                <th scope="col">Workload</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -78,25 +91,24 @@ class Table extends Component {
               {this.state.duties.map((duty) => (
                 <tr
                   key={duty.id}
-                  className={!duty.lastName ? "table-danger" : ""}
+                  className={!duty.member_id ? "table-danger" : ""}
                 >
-                  <td> {duty.name} </td>
-                  <td> {duty.rank} </td>
-                  <td> {duty.firstName} </td>
-                  <td> {duty.lastName}</td>
+                  <td> {duty.title} </td>
+                  <td> {duty.member_id} </td>
+                  <td> {duty.workload} </td>
                   <td>
                     <button
-                      onClick={() => this.editDuty(duty.id)}
+                      onClick={() => this.editDuty(duty.duty_id)}
                       className="btn btn-sm btn-success"
                     >
-                      Edit{" "}
+                      Edit
                     </button>
                     &nbsp;
                     <button
-                      onClick={() => this.deleteDuty(duty.id)}
+                      onClick={() => this.deleteDuty(duty.duty_id)}
                       className="btn btn-sm btn-danger"
                     >
-                      Delete{" "}
+                      Delete
                     </button>
                   </td>
                 </tr>
