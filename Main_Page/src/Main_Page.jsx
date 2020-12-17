@@ -1,23 +1,28 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import Add_Member from "./Add_Member";
 
 class Main_Page extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      member: {
-        rank: "",
-        first_name: "",
-        last_name: "",
-        departure_date: "",
-        rater_first_name: "",
-        rater_last_name: "",
-        arrival_date: "",
-        birthday: "",
-      },
-    };
+    // this.state = {
+    //   member: {
+    //     paygrade: "",
+    //     first_name: "",
+    //     last_name: "",
+    //     birthday: "",
+    //     has_assignment: "",
+    //     arrival_date: "",
+    //     departure_date: "",
+    //     opr_epr_status: "due now"
+    //   },
+    // };
   }
+
+  handleAddMember = (e) => {
+    e.preventDefault();
+    console.log("add member called");
+  };
 
   render() {
     return (
@@ -37,7 +42,12 @@ class Main_Page extends React.Component {
           <div>link to test2</div>
         </Link> */}
 
-        <Route path="/main/Add_Member" component={AddMember} />
+        <Route
+          path="/main/Add_Member"
+          component={AddMember}
+          state={this.state}
+        />
+        {/* <AddMember state={this.state}></AddMember> */}
         {/* <Route path="/main/test1" component={Test1} />
         <Route path="/main/test2" component={Test2} /> */}
         {/* <Route
@@ -51,9 +61,32 @@ class Main_Page extends React.Component {
   }
 }
 
-const AddMember = () => {
-  return <Add_Member />;
-};
+//this is the route/page that will handle adding a member
+class AddMember extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      member: {
+        paygrade: "E1",
+        first_name: "will",
+        last_name: "",
+        birthday: "",
+        has_assignment: "",
+        arrival_date: "",
+        departure_date: "",
+        opr_epr_status: "",
+      },
+    };
+  }
+
+  render() {
+    // console.log(this.state);
+    return <Add_Member onAddMember={this.handleAddMember} />;
+  }
+  // return <Add_Member
+  //   onAddMember={this.handleAddMember}
+  // />;
+}
 
 //this will test a query to the database in the spring environment
 // const Test1 = () => {
