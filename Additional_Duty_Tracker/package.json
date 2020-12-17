@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env BABEL_ENV=test jest",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --host 0.0.0.0 --port 9004",
     "start:standalone": "webpack-dev-server --env.standalone",
     "build": "webpack --mode=production",
     "analyze": "webpack --mode=production --env.analyze=true",
