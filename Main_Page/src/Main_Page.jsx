@@ -63,9 +63,49 @@ class AlphaRoster extends Component {
       });
   }
 
+  generateTable() {
+    let table = this.state.members.map((member) => {
+      {
+        if (member.opr_epr_status === 0) {
+        }
+      }
+      return (
+        <tr>
+          <td>{member.paygrade}</td>
+          <td>{member.first_name}</td>
+          <td>{member.last_name}</td>
+          <td>{member.birthday}</td>
+          <td>{member.has_assignment}</td>
+          <td>{member.arrival_date}</td>
+          <td>{member.departure_date}</td>
+          <td>{member.opr_epr_status}</td>
+        </tr>
+      );
+    });
+    return (
+      <table>
+        <thead>
+          <h2>Alpha Roster</h2>
+          <tr>
+            <td>Rank</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Date of Birth</td>
+            <td>Assignment Status</td>
+            <td>Arrival Date</td>
+            <td>Departure Date</td>
+            <td>Opr/EPR Status</td>
+          </tr>
+        </thead>
+        <tbody>{table}</tbody>
+      </table>
+    );
+  }
+
   render() {
     return (
       <div>
+        {this.generateTable()}
         <div>You are now seeing the Alpha Roster ooooo</div>
         {this.state.members[0].last_name}
       </div>
@@ -123,6 +163,18 @@ class AddMember extends Component {
           this.setState({ Request: "bad" });
         } else {
           this.setState({ Request: "good" });
+          this.setState({
+            member: {
+              paygrade: null,
+              first_name: null,
+              last_name: null,
+              birthday: null,
+              has_assignment: null,
+              arrival_date: null,
+              departure_date: null,
+              opr_epr_status: "Not Due",
+            },
+          });
         }
       });
   }
