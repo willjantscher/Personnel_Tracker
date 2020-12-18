@@ -8,6 +8,9 @@ import {
 import Add_Member from "./Add_Member";
 import Search_Member from "./Search_Member";
 import Edit_Member from "./Edit_member";
+import Display_Member from "./Display_Member";
+
+import "./Main_Page.css";
 
 class Main_Page extends React.Component {
   constructor(props) {
@@ -17,32 +20,49 @@ class Main_Page extends React.Component {
   render() {
     return (
       <Router>
-        <div class="wrapper">
-          <h1>Welcome to the page</h1>
+        <div className="alert-danger text-center">
+          THIS SITE CONTAINS PERSONALLY IDENTIFIEABLE INFORMATION
+        </div>
+        <div className="wrapper">
+          <div className="row mt-4">
+            {/* <div className="col-md-4">
+            <h3>Welcome to the Main Page</h3>
+          </div> */}
+            <div className="col-md-1"></div>
+            <div className="col-md-8">
+              <h3>
+                <Link to={"/main"}>
+                  <button className="btn btn-lg btn-primary">
+                    ----Home----
+                  </button>
+                </Link>
+                &nbsp; &nbsp;
+                <Link to={"/main/Add_Member"}>
+                  <button className="btn btn-sm btn-info">Add a Member</button>
+                </Link>
+                &nbsp; &nbsp;
+                <Link to={"/main/SearchMember"}>
+                  <button className="btn btn-sm btn-info">
+                    Search for a Member
+                  </button>
+                </Link>
+                &nbsp; &nbsp;
+                <Link to={"/main/Alpha_Roster"}>
+                  <button className="btn btn-sm btn-info">
+                    Generate Alpha Roster
+                  </button>
+                </Link>
+              </h3>
+            </div>
+            <div className="col-md-3"></div>
+          </div>
 
-          <nav id="sidebar">
-            <Link to={"/main"}>
-              <button>Home</button>
-            </Link>
-            <Link to={"/main/Add_Member"}>
-              <button>Add a Member</button>
-            </Link>
-            <Link to={"/main/SearchMember"}>
-              <button>Search for a Member and edit their data</button>
-            </Link>
-            <Link to={"/main/Alpha_Roster"}>
-              <button>Generate Alpha Roster</button>
-            </Link>
-          </nav>
-
-          <div id="content">
+          <div id="content" className="info">
             <Route path="/main/SearchMember" component={SearchMember} />
             <Route path="/main/Alpha_Roster" component={AlphaRoster} />
             <Route path="/main/Add_Member" component={AddMember} />
           </div>
-
-        </div> 
-
+        </div>
       </Router>
     );
   }
@@ -91,7 +111,11 @@ class SearchMember extends Component {
           )
         );
         // console.log(data.status)
-        if (data.status === 500) {
+        if (
+          data.status === 500 ||
+          this.state.selectedMember.first_name === "" ||
+          this.state.selectedMember.last_name === ""
+        ) {
           this.setState({ Request: "bad" });
         } else {
           this.setState({ Request: "good" });
@@ -135,56 +159,66 @@ class SearchMember extends Component {
     e.preventDefault();
     this.updateMember();
     console.log("member edited and updated in the database");
+    this.setState({ Request: "pending" });
     // return(<Redirect to="/main" />)
   };
 
   render() {
     return (
       <div>
-        Select a member to see their data
-        <Search_Member
-          members={this.state.members}
-          onSelectMember={this.handleSelectMember}
-        />
-        {(() => {
-          switch (this.state.memberSelected) {
-            case true:
-              return (
-                // <Redirect to="/main"/>
-                <div>
-                  <h4>this is the member data</h4>
-                  <Edit_Member
-                    member={this.state.selectedMember}
-                    onEditMember={this.handleEditMember}
-                    onInputChange={this.handleInputChange}
-                  />
-                </div>
-              );
-            default:
-              return <div></div>;
-          }
-        })()}
-        {(() => {
-          switch (this.state.Request) {
-            case "good":
-              return (
-                // <Redirect to="/main"/>
-                <div>
-                  {this.state.patchedMember.first_name} has been updated in the
-                  database
-                </div>
-              );
-            case "bad":
-              return (
-                <div>
-                  ERROR! You must specify a first and last name as well as an
-                  assignment status.
-                </div>
-              );
-            default:
-              return <div></div>;
-          }
-        })()}
+        <div className="row">
+          <div className="col-md-1"></div>
+
+          <div className="col-lg-10">
+            <h3>Select a member to see their data</h3>
+            <Search_Member
+              members={this.state.members}
+              onSelectMember={this.handleSelectMember}
+            />
+            {(() => {
+              switch (this.state.memberSelected) {
+                case true:
+                  return (
+                    // <Redirect to="/main"/>
+                    <div>
+                      <div></div>
+                      <Display_Member member={this.state.selectedMember} />
+                      <Edit_Member
+                        member={this.state.selectedMember}
+                        onEditMember={this.handleEditMember}
+                        onInputChange={this.handleInputChange}
+                      />
+                    </div>
+                  );
+                default:
+                  return <div></div>;
+              }
+            })()}
+            {(() => {
+              switch (this.state.Request) {
+                case "good":
+                  return (
+                    // <Redirect to="/main"/>
+                    <div className="alert-success text-center">
+                      {this.state.patchedMember.first_name} has been updated in
+                      the database
+                    </div>
+                  );
+                case "bad":
+                  return (
+                    <div className="alert-danger text-center">
+                      ERROR! You must specify a first and last name as well as
+                      an assignment status.
+                    </div>
+                  );
+                default:
+                  return <div></div>;
+              }
+            })()}
+          </div>
+
+          <div className="col-md-1"></div>
+        </div>
       </div>
     );
   }
@@ -231,7 +265,7 @@ class AlphaRoster extends Component {
         }
       }
       return (
-        <tr>
+        <tr className="">
           <td>{member.paygrade}</td>
           <td>{member.first_name}</td>
           <td>{member.last_name}</td>
@@ -248,21 +282,21 @@ class AlphaRoster extends Component {
       <div className="row">
         <div className="col-lg-1"></div>
         <div className="col-lg-8">
-          <h1>Alpha Roster</h1>
-          <table className="table table-striped table-bordered table-hover">
-            <thead>
+          <h3>Alpha Roster</h3>
+          <table className="table table-striped table-bordered table-hover table-light">
+            <thead className="thead-dark">
               <tr>
-                <td>Rank</td>
-                <td>First Name</td>
-                <td>Last Name</td>
-                <td>Date of Birth</td>
-                <td>Assignment Status</td>
-                <td>Arrival Date</td>
-                <td>Departure Date</td>
-                <td>Opr/EPR Status</td>
+                <th scope="col">Rank</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Date of Birth</th>
+                <th scope="col">Assignment Status</th>
+                <th scope="col">Arrival Date</th>
+                <th scope="col">Departure Date</th>
+                <th scope="col">OPR/EPR Status</th>
               </tr>
             </thead>
-            <tbody>{table}</tbody>
+            <tbody className="table-info">{table}</tbody>
           </table>
         </div>
         <div className="col-lg-1"></div>
@@ -303,6 +337,7 @@ class AddMember extends Component {
   };
 
   async postUser() {
+    console.log(this.state.member);
     await fetch("http://localhost:8080/members/add-member", {
       method: "POST",
       headers: {
@@ -313,29 +348,28 @@ class AddMember extends Component {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data)
-        this.setState({ postedMember: data }, () =>
-          console.log(
-            this.state.postedMember.first_name +
-              " has been added to the database"
-          )
-        );
+        this.setState({ postedMember: data });
         // console.log(data.status)
-        if (data.status === 500) {
+        if (
+          data.status === 500 ||
+          this.state.member.first_name === "" ||
+          this.state.member.last_name === ""
+        ) {
           this.setState({ Request: "bad" });
         } else {
           this.setState({ Request: "good" });
-          this.setState({
-            member: {
-              paygrade: null,
-              first_name: null,
-              last_name: null,
-              birthday: null,
-              has_assignment: null,
-              arrival_date: null,
-              departure_date: null,
-              opr_epr_status: "Not Due",
-            },
-          });
+          // this.setState({
+          //   member: {
+          //     paygrade: null,
+          //     first_name: null,
+          //     last_name: null,
+          //     birthday: null,
+          //     has_assignment: null,
+          //     arrival_date: null,
+          //     departure_date: null,
+          //     opr_epr_status: "Not Due",
+          //   },
+          // });
         }
       });
   }
@@ -343,6 +377,7 @@ class AddMember extends Component {
   handleAddMember = (e) => {
     e.preventDefault();
     this.postUser();
+    this.setState({ Request: "pending" });
     // this.setState({ member : {} });
   };
 
@@ -350,31 +385,38 @@ class AddMember extends Component {
     // console.log(this.state);
     return (
       <Router>
-        <Add_Member
-          onAddMember={this.handleAddMember}
-          onInputChange={this.handleInputChange}
-        />
-        {(() => {
-          switch (this.state.Request) {
-            case "good":
-              return (
-                // <Redirect to="/main"/>
-                <div>
-                  {this.state.postedMember.first_name} has been added to the
-                  database
-                </div>
-              );
-            case "bad":
-              return (
-                <div>
-                  ERROR! You must specify a first and last name as well as an
-                  assignment status.
-                </div>
-              );
-            default:
-              return <div></div>;
-          }
-        })()}
+        <div className="row">
+          <div className="col-md-1"></div>
+          <div className="col-md-8">
+            <Display_Member member={this.state.member} />
+            <Add_Member
+              onAddMember={this.handleAddMember}
+              onInputChange={this.handleInputChange}
+            />
+            {(() => {
+              switch (this.state.Request) {
+                case "good":
+                  return (
+                    // <Redirect to="/main"/>
+                    <div className="alert-success text-center">
+                      {this.state.postedMember.first_name} has been added to the
+                      database
+                    </div>
+                  );
+                case "bad":
+                  return (
+                    <div className="alert-danger text-center">
+                      ERROR! You must specify a first and last name as well as
+                      an assignment status.
+                    </div>
+                  );
+                default:
+                  return <div></div>;
+              }
+            })()}
+          </div>
+          <div className="col-md-3"></div>
+        </div>
       </Router>
     );
   }
