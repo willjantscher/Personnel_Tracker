@@ -32,7 +32,7 @@ const ListMembers = (props) => {
           </table>
         </div>
         <div>
-          <h4>Outbounds</h4>
+          <h4>Outbound Members</h4>
         </div>
         <div className="row">
           <table className="table table-striped table-bordered table-hover">
