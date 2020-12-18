@@ -1,9 +1,14 @@
 import React from "react";
+import 'regenerator-runtime/runtime';
+import ListMembers from "./ListMembers"
+
+//http://single-spa-playground.org/playground/instant-test?name=@scorp/pcs&url=9003
 
 class PCS_Tracker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      memberList: [{}],
       inbounds: [
         {
           firstName: "Aria",
@@ -35,9 +40,29 @@ class PCS_Tracker extends React.Component {
     };
   }
 
-  /*render(){
-        return (<div><h1>hello</h1></div>);
-    }*/
+  componentDidMount() {
+    console.log("here")
+    this.getData();
+  }
+
+  getData() {
+    fetch(`http://localhost:8080/members`)
+      .then((res) => res.json())
+      .then((data) => this.setState({ memberList: data }));
+  }
+
+
+
+  /*async componentDidMount(){
+    const memberList = await this.getMemberList();
+    this.setState({memberList : memberList});
+  }
+
+  async getMemberList(){
+    const response = await fetch ('http://localhost:8080/members');
+    const json = await response.json();
+    return json;
+  }*/
 
   render() {
     return (
@@ -97,6 +122,7 @@ class PCS_Tracker extends React.Component {
               ))}
             </tbody>
           </table>
+          <ListMembers memberList = {this.state.memberList}/>
         </div>
       </div>
     );
