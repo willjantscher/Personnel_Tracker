@@ -2,14 +2,16 @@ package com.example.demo;
 //./gradlew bootRun
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
-
+@CrossOrigin(origins="*")
 @RestController
 public class Controller {
-
 
     private final MemberRepository memberRepository;
     private final AdditionalDutyRepository additionalDutyRepository;
@@ -57,6 +59,11 @@ public class Controller {
 
 
 //    OPR_EPR_Tracker mapping
-
+    @PatchMapping("members/{member_id}")
+    public Member updateStatus(@RequestBody String Body, @PathVariable Long member_id){
+        Member member = this.memberRepository.findById(member_id).get();
+        member.setOpr_epr_status(Body);
+        return this.memberRepository.save(member);
+    }
 
 }
