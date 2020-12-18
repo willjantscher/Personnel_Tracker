@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
-@CrossOrigin(origins="*")
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-
-
+@CrossOrigin(origins="*")
 @RestController
-@CrossOrigin
+
 public class Controller {
 
     private final MemberRepository memberRepository;

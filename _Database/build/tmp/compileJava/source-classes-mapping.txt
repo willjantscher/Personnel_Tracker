@@ -2,6 +2,8 @@ com/example/demo/AdditionalDuty.java
  com.example.demo.AdditionalDuty
 com/example/demo/MemberRepository.java
  com.example.demo.MemberRepository
+com/example/demo/AdditionalDutyController.java
+ com.example.demo.AdditionalDutyController
 com/example/demo/DemoApplication.java
  com.example.demo.DemoApplication
 com/example/demo/Controller.java
