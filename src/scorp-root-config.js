@@ -1,6 +1,11 @@
 import { registerApplication, start } from "single-spa";
 
 registerApplication({
+  name: "@scorp/navbar",
+  app: () => System.import("@scorp/navbar"),
+  activeWhen: ["/"],
+});
+registerApplication({
   name: "@scorp/tracker",
   app: () => System.import("@scorp/tracker"),
   activeWhen: ["/tracker"],
