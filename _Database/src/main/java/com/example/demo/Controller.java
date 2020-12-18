@@ -6,11 +6,11 @@ package com.example.demo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-@CrossOrigin
-@RestController
-public class Controller {
+import java.util.Map;
 
+@RestController
+@CrossOrigin
+public class Controller {
 
     private final MemberRepository memberRepository;
     private final AdditionalDutyRepository additionalDutyRepository;
@@ -36,9 +36,28 @@ public class Controller {
         return member;
     }
 
+    @PostMapping("/members/add-member")
+    public Member addMember (@RequestBody Member member) {
+        this.memberRepository.save(member);
+        return member;
+    }
+  
+    @PatchMapping("/members/edit-member/{member_id}")
+    public Member patchMember (@PathVariable Long member_id, @RequestBody Member member) {
+        return member;
+    }
+
+
+//    Additional_Duty_Tracker mapping
     @GetMapping("/duties")
     public Iterable<AdditionalDuty> duties() {
         Iterable<AdditionalDuty> output = this.additionalDutyRepository.findAll();
+        return output;
+    }
+
+    @GetMapping("/duties/details")
+    public Iterable<Map> dutiesDetails() {
+        Iterable<Map> output = this.additionalDutyRepository.findAllDetails();
         return output;
     }
 
@@ -48,21 +67,28 @@ public class Controller {
         return additionalDuty;
     }
 
-//    main page mapping
-
-    //    main page mapping
-    @PostMapping("/members/add-member")
-    public Member addMember (@RequestBody Member member) {
-        this.memberRepository.save(member);
-        return member;
+    @GetMapping("/duties/unassigned")
+    public Iterable<AdditionalDuty> unassignedDuties() {
+        Iterable<AdditionalDuty> output = this.additionalDutyRepository.findUnassigned();
+        return output;
     }
 
-    @PatchMapping("/members/edit-member/{member_id}")
-    public Member patchMember (@PathVariable Long member_id, @RequestBody Member member) {
-        return member;
+    @DeleteMapping("/duties/{duty_id}")
+    public String deleteDuty(@PathVariable Long duty_id) {
+        this.additionalDutyRepository.deleteById(duty_id);
+        return "Deleted additional duty";
     }
 
-//    Additional_Duty_Tracker mapping
+    //    @PatchMapping("/duties/{duty_id}")
+//    public AdditionalDuty editDuty(@RequestBody AdditionalDuty input, @PathVariable Long duty_id) {
+//        AdditionalDuty editThis = this.additionalDutyRepository.findById(duty_id).get();
+//        editThis.setDuty_id(input.getDuty_id());
+//        editThis.setTitle(input.getTitle());
+//        editThis.setMember_id(input.getMember_id());
+//        editThis.setWorkload(input.getWorkload());
+//        return this.additionalDutyRepository.save(editThis);
+//    }
+
 
 
 //    Inbound_Outbound_Tracker mapping
