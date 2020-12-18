@@ -30,9 +30,9 @@ public class Controller {
     }
 
     @GetMapping("/members/{member_id}")
-    public String member(@PathVariable Long member_id) {
+    public Member member(@PathVariable Long member_id) {
         Member member =this.memberRepository.findById(member_id).get();
-        return member.toString();
+        return member;
     }
 
     @GetMapping("/duties")

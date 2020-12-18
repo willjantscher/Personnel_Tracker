@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Add_Member from "./Add_Member";
 import Search_Member from "./Search_Member";
+import Edit_Member from "./Edit_member"
 
 class Main_Page extends React.Component {
   constructor(props) {
@@ -43,6 +44,8 @@ class SearchMember extends Component {
     super(props);
     this.state = {
       members: [{}],
+      selectedMemberId: null,
+      selectedMember: {},
     };
   }
   componentDidMount() {
@@ -56,30 +59,39 @@ class SearchMember extends Component {
       });
   }
 
+  handleSelectMember = (e) => {
+    console.log(e.target.value)
+    this.setState({ selectedMemberId : e.target.value }, () => {
+      fetch(`http://localhost:8080/members/${this.state.selectedMemberId}`, {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data)
+          this.setState({ selectedMember: data });
+        });
+    })
+
+    // return(
+    //   <Redirect to="/main" />
+    // )
+  }
+
   render() {
     return (
       <div>
         Select a member to see their data
-        <Search_Member members={this.state.members} />
-        <Link to={"/main/SearchMember/EditMember"}>
-          <div>Edit a member</div>
-        </Link>
-        <Route path="/main/SearchMember/EditMember" component={EditMember} />
+        <Search_Member 
+          members={this.state.members}
+          onSelectMember={this.handleSelectMember} 
+        />
+
+
       </div>
     );
   }
 }
 
-class EditMember extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return <div>Inside of the Edit Member component</div>;
-  }
-}
 
 class AlphaRoster extends Component {
   constructor(props) {
@@ -183,7 +195,7 @@ class AddMember extends Component {
   }
 
   handleInputChange = (e) => {
-    e.preventDefault;
+    e.preventDefault();
     let tempMember = this.state.member;
     tempMember[e.target.id] = e.target.value;
     this.setState({ member: tempMember });
