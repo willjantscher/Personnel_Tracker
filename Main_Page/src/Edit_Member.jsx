@@ -35,7 +35,7 @@ const Edit_Member = (props) => {
 
   return (
     <div>
-      <h2>Edit Member</h2>
+      <h2>Edit Member Data</h2>
       <form onSubmit={props.onEditMember}>
         <div>
           <span>Paygrade: </span>

@@ -10,7 +10,10 @@ import Search_Member from "./Search_Member";
 import Edit_Member from "./Edit_member";
 import Display_Member from "./Display_Member";
 
-import "./Main_Page.css";
+// import "./Main_Page.css";
+
+// import USSF_GIF from "./Photos/USSF_GIF.gif"
+// import USSF_LOGO from "./Photos/USSF_LOGO.png"
 
 class Main_Page extends React.Component {
   constructor(props) {
@@ -63,6 +66,15 @@ class Main_Page extends React.Component {
             <Route path="/main/Add_Member" component={AddMember} />
           </div>
         </div>
+
+        <Route className="row justify-content-center" exact path="/main">
+          <img
+            className="justify-content-center"
+            src={"https://media1.giphy.com/media/eIa61FAucY1sVbxsu5/giphy.gif"}
+            width="500"
+            alt="loading awesomeness"
+          />
+        </Route>
       </Router>
     );
   }
@@ -119,9 +131,9 @@ class SearchMember extends Component {
           this.setState({ Request: "bad" });
         } else {
           this.setState({ Request: "good" });
+          this.setState({ memberSelected: false });
         }
       });
-    this.setState({ memberSelected: false });
   }
 
   handleSelectMember = (e) => {
