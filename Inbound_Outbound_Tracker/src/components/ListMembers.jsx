@@ -1,5 +1,5 @@
 import React from 'react'
-import Member from './Member'
+//import Member from './Member'
 
 const ListMembers = (props) => {
     
