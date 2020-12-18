@@ -3,7 +3,8 @@ import React from "react";
 const Add_Member = (props) => {
   return (
     <div>
-      <h2>Add Member</h2>
+      <h3>Add Member</h3>
+
       <form onSubmit={props.onAddMember}>
         <div>
           <span>Paygrade: </span>
@@ -34,6 +35,7 @@ const Add_Member = (props) => {
         <div>
           <span>First Name: </span>
           <input
+            className="form-label"
             name="first name"
             id="first_name"
             placeholder="First Name"
@@ -65,9 +67,12 @@ const Add_Member = (props) => {
           <select
             id="opr_epr_status"
             onChange={props.onInputChange}
-            defaultValue="Not Due"
+            defaultValue="not-due"
           >
-            <option value="Not Due">Not Due</option>
+            <option value="not-due">Not Due</option>
+            <option value="created">Created</option>
+            <option value="routed">Routed</option>
+            <option value="completed">Completed</option>
           </select>
         </div>
 
@@ -108,24 +113,7 @@ const Add_Member = (props) => {
             type="date"
           ></input>
         </div>
-        {/* <div>
-          <span>Rater First Name: </span>
-          <input
-            name="rater first name"
-            id="10"
-            placeholder="First Name"
-            onChange={props.onInputChange}
-          ></input>
-        </div>
-        <div>
-          <span>Rater Last Name: </span>
-          <input
-            name="rater last name"
-            id="11"
-            placeholder="Last Name"
-            onChange={props.onInputChange}
-          ></input>
-        </div> */}
+
         <input type="submit" value="Add Member to Database" />
       </form>
     </div>

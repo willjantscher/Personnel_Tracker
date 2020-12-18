@@ -8,6 +8,7 @@ const Edit_Member = (props) => {
   var departure_date;
   var has_assignment;
   var no_assignment;
+  var birthday;
 
   if (props.member.arrival_date === null) {
     arrival_date = "";
@@ -19,7 +20,6 @@ const Edit_Member = (props) => {
   } else {
     departure_date = props.member.departure_date.substring(0, 10);
   }
-
   if (props.member.has_assignment === 0) {
     has_assignment = false;
     no_assignment = true;
@@ -27,10 +27,15 @@ const Edit_Member = (props) => {
     has_assignment = true;
     no_assignment = false;
   }
+  if (props.member.birthday === null) {
+    birthday = "";
+  } else {
+    birthday = props.member.birthday.substring(0, 10);
+  }
 
   return (
     <div>
-      <h2>Edit Member</h2>
+      <h2>Edit Member Data</h2>
       <form onSubmit={props.onEditMember}>
         <div>
           <span>Paygrade: </span>
@@ -88,7 +93,7 @@ const Edit_Member = (props) => {
           <span>Birthday: </span>
           <input
             id="birthday"
-            defaultValue={props.member.birthday.substring(0, 10)}
+            defaultValue={birthday}
             onChange={props.onInputChange}
             type="date"
           ></input>
@@ -101,7 +106,10 @@ const Edit_Member = (props) => {
             onChange={props.onInputChange}
             defaultValue={props.member.opr_epr_status}
           >
-            <option value="Not Due">Not Due</option>
+            <option value="not-due">Not Due</option>
+            <option value="created">Created</option>
+            <option value="routed">Routed</option>
+            <option value="completed">Completed</option>
           </select>
         </div>
 
@@ -164,6 +172,7 @@ const Edit_Member = (props) => {
             onChange={props.onInputChange}
           ></input>
         </div> */}
+        <div></div>
         <input type="submit" value="Update Member Data" />
       </form>
     </div>
