@@ -3,15 +3,13 @@ package com.example.demo;
 //docker-compose up
 //docker-compose down -v
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
+@CrossOrigin
 public class Controller {
-
 
     private final MemberRepository memberRepository;
     private final AdditionalDutyRepository additionalDutyRepository;
@@ -37,9 +35,25 @@ public class Controller {
         return member.toString();
     }
 
+    @PostMapping("/members/add-member")
+    public Member addMember (@RequestBody Member member) {
+        this.memberRepository.save(member);
+        return member;
+    }
+
+//    main page mapping
+
+
+//    Additional_Duty_Tracker mapping
     @GetMapping("/duties")
     public Iterable<AdditionalDuty> duties() {
         Iterable<AdditionalDuty> output = this.additionalDutyRepository.findAll();
+        return output;
+    }
+
+    @GetMapping("/duties/details")
+    public Iterable<Map> dutiesDetails() {
+        Iterable<Map> output = this.additionalDutyRepository.findAllDetails();
         return output;
     }
 
@@ -49,10 +63,32 @@ public class Controller {
         return additionalDuty;
     }
 
-//    main page mapping
+    @GetMapping("/duties/unassigned")
+    public Iterable<AdditionalDuty> unassignedDuties() {
+        Iterable<AdditionalDuty> output = this.additionalDutyRepository.findUnassigned();
+        return output;
+    }
 
+    @DeleteMapping("/duties/{duty_id}")
+    public String deleteDuty(@PathVariable Long duty_id) {
+        this.additionalDutyRepository.deleteById(duty_id);
+        return "Deleted additional duty";
+    }
 
-//    Additional_Duty_Tracker mapping
+    @PostMapping("/duties")
+    public AdditionalDuty create(@RequestBody AdditionalDuty additionalDuty) {
+        return this.additionalDutyRepository.save(additionalDuty);
+    }
+
+    //    @PatchMapping("/duties/{duty_id}")
+//    public AdditionalDuty editDuty(@RequestBody AdditionalDuty input, @PathVariable Long duty_id) {
+//        AdditionalDuty editThis = this.additionalDutyRepository.findById(duty_id).get();
+//        editThis.setDuty_id(input.getDuty_id());
+//        editThis.setTitle(input.getTitle());
+//        editThis.setMember_id(input.getMember_id());
+//        editThis.setWorkload(input.getWorkload());
+//        return this.additionalDutyRepository.save(editThis);
+//    }
 
 
 //    Inbound_Outbound_Tracker mapping
