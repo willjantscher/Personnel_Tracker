@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AdditionalDutyService from "../services/AdditionalDutyService";
-import EditModal from "./EditModal";
+import AddForm from "./AddForm";
 
 class Table extends Component {
   constructor(props) {
@@ -8,8 +8,7 @@ class Table extends Component {
 
     this.state = {
       duties: [],
-      showEditModal: false,
-      edit_id: null,
+      showAddForm: false
     };
 
     // this.addDuty = this.addDuty.bind(this);
@@ -17,8 +16,8 @@ class Table extends Component {
     this.deleteDuty = this.deleteDuty.bind(this);
     this.viewAll = this.viewAll.bind(this);
     this.viewUnassigned = this.viewUnassigned.bind(this);
-    this.showEditModal = this.showEditModal.bind(this);
-    this.hideEditModal = this.hideEditModal.bind(this);
+    this.addDuty = this.addDuty.bind(this);
+    this.submitAddDuty = this.submitAddDuty.bind(this);
   }
 
   componentDidMount() {
@@ -45,13 +44,30 @@ class Table extends Component {
     });
   }
 
-  showEditModal(id) {
-    this.setState({ showEditModal: true, edit_id: id });
+  addDuty() {
+    this.setState({ showAddForm: true });
   }
 
-  hideEditModal() {
-    this.setState({ showEditModal: false });
+  submitAddDuty(e) {
+    e.preventDefault();
+    let [dutyTitle, assignment, workload] = Array.from(e.target.elements).slice(0,3).map(element => element.value);
+
+    // https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples 
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: dutyTitle,
+          member_id: assignment,
+          workload: workload,
+        })
+    };
+
+    AdditionalDutyService.createDuty(requestOptions).then((res) => {
+        this.setState({ duties: res.data, showAddForm: false });
+    });
   }
+
 
   colorizeRow(duty) {
       if (!duty.last_name) {
@@ -83,10 +99,14 @@ class Table extends Component {
                 View Unassigned
               </button>
               &nbsp;
-              <button className="btn btn-sm btn-success" onClick={this.addDuty}>
-                Add Additional Duty
+              <button
+                className="btn btn-sm btn-success"
+                onClick={this.addDuty}
+              >
+                Add a New Duty
               </button>
             </h3>
+            {this.state.showAddForm ? <AddForm /> : null}
           </div>
         </div>
         <br />
@@ -114,18 +134,10 @@ class Table extends Component {
                   <td> {duty.workload} </td>
                   <td>
                     <button
-                      data-bs-toggle="modal"
-                      data-bs-target="#editModal"
                       className="btn btn-sm btn-success"
-                      onClick={this.showModal}
                     >
                       Edit
                     </button>
-                    <EditModal
-                      id={this.edit_id}
-                      show={this.state.show}
-                      handleClose={this.hideModal}
-                    />
                     &nbsp;
                     <button
                       onClick={() => this.deleteDuty(duty.duty_id)}

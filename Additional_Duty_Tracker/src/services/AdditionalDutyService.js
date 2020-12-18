@@ -19,13 +19,13 @@ class AdditionalDutyService {
     return axios.get(ADDITIONAL_DUTY_API_BASE_URL + "/unassigned");
   }
 
-  // createDuty(duty) {
-  //   return axios.post(ADDITIONAL_DUTY_API_BASE_URL, duty);
-  // }
+  createDuty(duty) {
+    return axios.post(ADDITIONAL_DUTY_API_BASE_URL);
+  }
 
-  // updateDuty(duty, dutyId) {
-  //   return axios.put(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId, duty);
-  // }
+  updateDuty(duty, dutyId) {
+    return axios.put(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId);
+  }
 
   deleteDuty(dutyId) {
     return axios.delete(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId);
