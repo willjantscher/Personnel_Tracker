@@ -235,23 +235,27 @@ class AlphaRoster extends Component {
     });
 
     return (
-      <div>
-        <h1>Alpha Roster</h1>
-        <table>
-          <thead>
-            <tr>
-              <td>Rank</td>
-              <td>First Name</td>
-              <td>Last Name</td>
-              <td>Date of Birth</td>
-              <td>Assignment Status</td>
-              <td>Arrival Date</td>
-              <td>Departure Date</td>
-              <td>Opr/EPR Status</td>
-            </tr>
-          </thead>
-          <tbody>{table}</tbody>
-        </table>
+      <div className="row">
+        <div className="col-lg-1"></div>
+        <div className="col-lg-8">
+          <h1>Alpha Roster</h1>
+          <table className="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <td>Rank</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Date of Birth</td>
+                <td>Assignment Status</td>
+                <td>Arrival Date</td>
+                <td>Departure Date</td>
+                <td>Opr/EPR Status</td>
+              </tr>
+            </thead>
+            <tbody>{table}</tbody>
+          </table>
+        </div>
+        <div className="col-lg-1"></div>
       </div>
     );
   }
@@ -261,7 +265,6 @@ class AlphaRoster extends Component {
   }
 }
 
-//this is the route/page that will handle adding a member
 class AddMember extends Component {
   constructor(props) {
     super(props);
@@ -368,3 +371,7 @@ class AddMember extends Component {
 }
 
 export default Main_Page;
+
+//npm install bootstrap
+//
+//look at add duty, src, componennts, table for formatting
