@@ -2,19 +2,21 @@ import React from "react";
 
 const Search_Member = (props) => {
   let memberNames = props.members.map((member) => {
-    return member.first_name + " " + member.last_name;
+    return (
+      <option
+        value={member.member_id}
+        key={member.member_id}
+        id={member.member_id}
+      >
+        {member.first_name + " " + member.last_name}
+      </option>
+    );
   });
   return (
-    <div>
-      <select id="paygrade">
-        <option value=""></option>
-        {memberNames.map((member) => (
-          <option value={member} key={member}>
-            {member}
-          </option>
-        ))}
-      </select>
-    </div>
+    <select defaultValue="" onChange={props.onSelectMember}>
+      <option key="emptyoption" value=""></option>
+      {memberNames}
+    </select>
   );
 };
 

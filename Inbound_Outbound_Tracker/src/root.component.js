@@ -1,6 +1,13 @@
 import React from "react";
-import PCS_Tracker from "./PCS_Tracker.jsx";
+import PCS_Tracker from "./components/PCS_Tracker";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./components/Navbar";
 
 export default function Root(props) {
-  return <PCS_Tracker />;
+  return (
+    <div>
+      <Navbar />
+      <PCS_Tracker />
+    </div>
+  );
 }
