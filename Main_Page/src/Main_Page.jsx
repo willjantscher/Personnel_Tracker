@@ -17,23 +17,32 @@ class Main_Page extends React.Component {
   render() {
     return (
       <Router>
-        <h1>Welcome to the page</h1>
-        <Link to={"/main"}>
-          <div>Home</div>
-        </Link>
-        <Link to={"/main/Add_Member"}>
-          <div>Add a Member</div>
-        </Link>
-        <Link to={"/main/SearchMember"}>
-          <div>Search for a Member and edit their data</div>
-        </Link>
-        <Link to={"/main/Alpha_Roster"}>
-          <div>Generate Alpha Roster</div>
-        </Link>
+        <div class="wrapper">
+          <h1>Welcome to the page</h1>
 
-        <Route path="/main/SearchMember" component={SearchMember} />
-        <Route path="/main/Alpha_Roster" component={AlphaRoster} />
-        <Route path="/main/Add_Member" component={AddMember} />
+          <nav id="sidebar">
+            <Link to={"/main"}>
+              <button>Home</button>
+            </Link>
+            <Link to={"/main/Add_Member"}>
+              <button>Add a Member</button>
+            </Link>
+            <Link to={"/main/SearchMember"}>
+              <button>Search for a Member and edit their data</button>
+            </Link>
+            <Link to={"/main/Alpha_Roster"}>
+              <button>Generate Alpha Roster</button>
+            </Link>
+          </nav>
+
+          <div id="content">
+            <Route path="/main/SearchMember" component={SearchMember} />
+            <Route path="/main/Alpha_Roster" component={AlphaRoster} />
+            <Route path="/main/Add_Member" component={AddMember} />
+          </div>
+
+        </div> 
+
       </Router>
     );
   }
@@ -126,6 +135,7 @@ class SearchMember extends Component {
     e.preventDefault();
     this.updateMember();
     console.log("member edited and updated in the database");
+    // return(<Redirect to="/main" />)
   };
 
   render() {
