@@ -35,6 +35,12 @@ public class Controller {
         return member.toString();
     }
 
+    @PostMapping("/members/add-member")
+    public Member addMember (@RequestBody Member member) {
+        this.memberRepository.save(member);
+        return member;
+    }
+
 //    main page mapping
 
 
@@ -69,6 +75,11 @@ public class Controller {
         return "Deleted additional duty";
     }
 
+    @PostMapping("/duties")
+    public AdditionalDuty create(@RequestBody AdditionalDuty additionalDuty) {
+        return this.additionalDutyRepository.save(additionalDuty);
+    }
+
     //    @PatchMapping("/duties/{duty_id}")
 //    public AdditionalDuty editDuty(@RequestBody AdditionalDuty input, @PathVariable Long duty_id) {
 //        AdditionalDuty editThis = this.additionalDutyRepository.findById(duty_id).get();
@@ -79,13 +90,6 @@ public class Controller {
 //        return this.additionalDutyRepository.save(editThis);
 //    }
 
-
-    //    main page mapping
-    @PostMapping("/members/add-member")
-    public Member addMember (@RequestBody Member member) {
-        this.memberRepository.save(member);
-        return member;
-    }
 
 //    Inbound_Outbound_Tracker mapping
 
