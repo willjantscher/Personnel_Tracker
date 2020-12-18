@@ -1,8 +1,8 @@
 {
-  "name": "@scorp/tracker",
+  "name": "@scorp/navbar",
   "scripts": {
-    "start": "webpack-dev-server --host 0.0.0.0 --port 9002",
-    "start:standalone": "webpack-dev-server --env.standalone",
+    "start": "webpack-dev-server --host 0.0.0.0 --port 9005",
+    "start:standalone": "webpack-dev-server  --env.standalone",
     "build": "webpack --mode=production",
     "analyze": "webpack --mode=production --env.analyze=true",
     "lint": "eslint src --ext js",
@@ -48,7 +48,6 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "bootstrap": "^4.5.3",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   }
