@@ -2,9 +2,13 @@ import React from 'react'
 import Member from './Member'
 
 const ListMembers = (props) => {
+    
+    let members = props.memberList.map(member => <li>{member.first_name}</li> );
+    console.log(members);
+
     return(
         <ul>
-            {props.memberList.map(member => <li><Member key={member.member_id} name={member.first_name} /></li> )}    
+            {members}    
         </ul>
     );
 }

@@ -41,15 +41,16 @@ class PCS_Tracker extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/members", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        //console.log(data)
-        this.setState({ memberList: data}, () => console.log(this.state.memberList));
-      });
+    console.log("here")
+    this.getData();
   }
+
+  getData() {
+    fetch(`http://localhost:8080/members`)
+      .then((res) => res.json())
+      .then((data) => this.setState({ memberList: data }));
+  }
+
 
 
   /*async componentDidMount(){
@@ -121,7 +122,7 @@ class PCS_Tracker extends React.Component {
               ))}
             </tbody>
           </table>
-          <ListMembers memberList = {this.state.memberList[0].first_name}/>
+          <ListMembers memberList = {this.state.memberList}/>
         </div>
       </div>
     );
