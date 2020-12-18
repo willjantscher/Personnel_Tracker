@@ -1,13 +1,44 @@
 import React from "react";
 
 const Edit_Member = (props) => {
+  // console.log(props.member)
+  // console.log(props.member.birthday.substring(0, 10))
+  // console.log(props.member.has_assignment)
+  var arrival_date;
+  var departure_date;
+  var has_assignment;
+  var no_assignment;
+
+  if (props.member.arrival_date === null) {
+    arrival_date = "";
+  } else {
+    arrival_date = props.member.arrival_date.substring(0, 10);
+  }
+  if (props.member.departure_date === null) {
+    departure_date = "";
+  } else {
+    departure_date = props.member.departure_date.substring(0, 10);
+  }
+
+  if (props.member.has_assignment === 0) {
+    has_assignment = false;
+    no_assignment = true;
+  } else {
+    has_assignment = true;
+    no_assignment = false;
+  }
+
   return (
     <div>
       <h2>Edit Member</h2>
-      <form onSubmit={props.onAddMember}>
+      <form onSubmit={props.onEditMember}>
         <div>
           <span>Paygrade: </span>
-          <select id="paygrade" defaultValue="" onChange={props.onInputChange}>
+          <select
+            id="paygrade"
+            defaultValue={props.member.paygrade}
+            onChange={props.onInputChange}
+          >
             <option value=""></option>
             <option value="E1">E1</option>
             <option value="E2">E2</option>
@@ -37,6 +68,7 @@ const Edit_Member = (props) => {
             name="first name"
             id="first_name"
             placeholder="First Name"
+            defaultValue={props.member.first_name}
             onChange={props.onInputChange}
           ></input>
         </div>
@@ -47,6 +79,7 @@ const Edit_Member = (props) => {
             name="last name"
             id="last_name"
             placeholder="Last Name"
+            defaultValue={props.member.last_name}
             onChange={props.onInputChange}
           ></input>
         </div>
@@ -55,6 +88,7 @@ const Edit_Member = (props) => {
           <span>Birthday: </span>
           <input
             id="birthday"
+            defaultValue={props.member.birthday.substring(0, 10)}
             onChange={props.onInputChange}
             type="date"
           ></input>
@@ -65,7 +99,7 @@ const Edit_Member = (props) => {
           <select
             id="opr_epr_status"
             onChange={props.onInputChange}
-            defaultValue="Not Due"
+            defaultValue={props.member.opr_epr_status}
           >
             <option value="Not Due">Not Due</option>
           </select>
@@ -77,6 +111,7 @@ const Edit_Member = (props) => {
             id="has_assignment"
             value="0"
             onChange={props.onInputChange}
+            defaultChecked={has_assignment}
             type="radio"
             name="hasAssignment"
           ></input>
@@ -84,6 +119,7 @@ const Edit_Member = (props) => {
           <input
             id="no_assignment"
             value="1"
+            defaultChecked={no_assignment}
             onChange={props.onInputChange}
             type="radio"
             name="hasAssignment"
@@ -95,6 +131,7 @@ const Edit_Member = (props) => {
           <span>Arrival Date: </span>
           <input
             id="arrival_date"
+            defaultValue={arrival_date}
             onChange={props.onInputChange}
             type="date"
           ></input>
@@ -104,6 +141,7 @@ const Edit_Member = (props) => {
           <span>Departure Date: </span>
           <input
             id="departure_date"
+            defaultValue={departure_date}
             onChange={props.onInputChange}
             type="date"
           ></input>
@@ -126,7 +164,7 @@ const Edit_Member = (props) => {
             onChange={props.onInputChange}
           ></input>
         </div> */}
-        <input type="submit" value="Add Member to Database" />
+        <input type="submit" value="Update Member Data" />
       </form>
     </div>
   );

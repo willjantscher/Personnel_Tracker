@@ -3,6 +3,7 @@ package com.example.demo;
 //docker-compose up
 //docker-compose down -v
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -53,6 +54,11 @@ public class Controller {
     @PostMapping("/members/add-member")
     public Member addMember (@RequestBody Member member) {
         this.memberRepository.save(member);
+        return member;
+    }
+
+    @PatchMapping("/members/edit-member/{member_id}")
+    public Member patchMember (@PathVariable Long member_id, @RequestBody Member member) {
         return member;
     }
 

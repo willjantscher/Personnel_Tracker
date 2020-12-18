@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Add_Member from "./Add_Member";
 import Search_Member from "./Search_Member";
-import Edit_Member from "./Edit_member"
+import Edit_Member from "./Edit_member";
 
 class Main_Page extends React.Component {
   constructor(props) {
@@ -45,7 +45,9 @@ class SearchMember extends Component {
     this.state = {
       members: [{}],
       selectedMemberId: null,
-      selectedMember: {},
+      selectedMember: null,
+      memberSelected: false,
+      patchedMember: null,
     };
   }
   componentDidMount() {
@@ -59,39 +61,124 @@ class SearchMember extends Component {
       });
   }
 
+  async updateMember() {
+    await fetch(
+      `http://localhost:8080/members/edit-member/${this.state.selectedMemberId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.state.selectedMember),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data)
+        this.setState({ patchedMember: data }, () =>
+          console.log(
+            this.state.patchedMember.first_name +
+              " has been updated in the database"
+          )
+        );
+        // console.log(data.status)
+        if (data.status === 500) {
+          this.setState({ Request: "bad" });
+        } else {
+          this.setState({ Request: "good" });
+        }
+      });
+    this.setState({ memberSelected: false });
+  }
+
   handleSelectMember = (e) => {
-    console.log(e.target.value)
-    this.setState({ selectedMemberId : e.target.value }, () => {
+    // console.log(e.target.value)
+    this.setState({ Request: "pending" });
+    this.setState({ memberSelected: false });
+    this.setState({ selectedMemberId: e.target.value }, () => {
       fetch(`http://localhost:8080/members/${this.state.selectedMemberId}`, {
         method: "GET",
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data)
-          this.setState({ selectedMember: data });
+          // console.log(data)
+          this.setState({ selectedMember: data, memberSelected: true }, () =>
+            console.log(this.state.selectedMember)
+          );
         });
-    })
+    });
 
     // return(
     //   <Redirect to="/main" />
     // )
-  }
+  };
+
+  handleInputChange = (e) => {
+    e.preventDefault();
+    // console.log("some input has changed")
+    let tempMember = this.state.selectedMember;
+    tempMember[e.target.id] = e.target.value;
+    this.setState({ selectedMember: tempMember });
+    // console.log('input change called ' + this.state.member[e.target.id] )
+  };
+
+  handleEditMember = (e) => {
+    e.preventDefault();
+    this.updateMember();
+    console.log("member edited and updated in the database");
+  };
 
   render() {
     return (
       <div>
         Select a member to see their data
-        <Search_Member 
+        <Search_Member
           members={this.state.members}
-          onSelectMember={this.handleSelectMember} 
+          onSelectMember={this.handleSelectMember}
         />
-
-
+        {(() => {
+          switch (this.state.memberSelected) {
+            case true:
+              return (
+                // <Redirect to="/main"/>
+                <div>
+                  <h4>this is the member data</h4>
+                  <Edit_Member
+                    member={this.state.selectedMember}
+                    onEditMember={this.handleEditMember}
+                    onInputChange={this.handleInputChange}
+                  />
+                </div>
+              );
+            default:
+              return <div></div>;
+          }
+        })()}
+        {(() => {
+          switch (this.state.Request) {
+            case "good":
+              return (
+                // <Redirect to="/main"/>
+                <div>
+                  {this.state.patchedMember.first_name} has been updated in the
+                  database
+                </div>
+              );
+            case "bad":
+              return (
+                <div>
+                  ERROR! You must specify a first and last name as well as an
+                  assignment status.
+                </div>
+              );
+            default:
+              return <div></div>;
+          }
+        })()}
       </div>
     );
   }
 }
-
 
 class AlphaRoster extends Component {
   constructor(props) {
