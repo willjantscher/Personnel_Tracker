@@ -11,14 +11,17 @@ class PCS_Tracker extends React.Component {
   }
 
   componentDidMount() {
-    this.getData();
-  }
-
-  getData() {
     fetch(`http://localhost:8080/members`)
       .then((res) => res.json())
       .then((data) => this.setState({ memberList: data }));
+    //this.getData();
   }
+
+  /*getData() {
+    fetch(`http://localhost:8080/members`)
+      .then((res) => res.json())
+      .then((data) => this.setState({ memberList: data }));
+  }*/
 
 
   render() {
