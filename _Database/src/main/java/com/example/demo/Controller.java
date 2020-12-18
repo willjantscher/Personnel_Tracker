@@ -3,6 +3,7 @@ package com.example.demo;
 //docker-compose up
 //docker-compose down -v
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -30,9 +31,9 @@ public class Controller {
     }
 
     @GetMapping("/members/{member_id}")
-    public String member(@PathVariable Long member_id) {
+    public Member member(@PathVariable Long member_id) {
         Member member =this.memberRepository.findById(member_id).get();
-        return member.toString();
+        return member;
     }
 
     @PostMapping("/members/add-member")
@@ -40,8 +41,11 @@ public class Controller {
         this.memberRepository.save(member);
         return member;
     }
-
-//    main page mapping
+  
+    @PatchMapping("/members/edit-member/{member_id}")
+    public Member patchMember (@PathVariable Long member_id, @RequestBody Member member) {
+        return member;
+    }
 
 
 //    Additional_Duty_Tracker mapping
@@ -75,11 +79,6 @@ public class Controller {
         return "Deleted additional duty";
     }
 
-    @PostMapping("/duties")
-    public AdditionalDuty create(@RequestBody AdditionalDuty additionalDuty) {
-        return this.additionalDutyRepository.save(additionalDuty);
-    }
-
     //    @PatchMapping("/duties/{duty_id}")
 //    public AdditionalDuty editDuty(@RequestBody AdditionalDuty input, @PathVariable Long duty_id) {
 //        AdditionalDuty editThis = this.additionalDutyRepository.findById(duty_id).get();
@@ -89,6 +88,7 @@ public class Controller {
 //        editThis.setWorkload(input.getWorkload());
 //        return this.additionalDutyRepository.save(editThis);
 //    }
+
 
 
 //    Inbound_Outbound_Tracker mapping

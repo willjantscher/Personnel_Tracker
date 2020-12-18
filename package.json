@@ -41,6 +41,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "bootstrap": "^4.5.3",
     "single-spa": "^5.8.3"
   }
 }
