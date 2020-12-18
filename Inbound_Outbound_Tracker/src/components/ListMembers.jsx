@@ -32,6 +32,8 @@ const ListMembers = (props) => {
           </table>
         </div>
         <div>
+            <br/>
+            <br/>
           <h4>Outbound Members</h4>
         </div>
         <div className="row">
@@ -61,53 +63,3 @@ const ListMembers = (props) => {
 }
 
 export default ListMembers
-
-/*</div><div>
-          <h4>Inbounds</h4>
-        <div className="row">
-          <table className="table table-striped table-bordered table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Rank</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">RNLTD</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.inbounds.map((inbounds) => (
-                <tr>
-                  <td> {inbounds.rank} </td>
-                  <td> {inbounds.firstName} </td>
-                  <td> {inbounds.lastName} </td>
-                  <td> {inbounds.RNLTD}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div>
-          <h4>Outbounds</h4>
-        </div>
-        <div className="row">
-          <table className="table table-striped table-bordered table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Rank</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Departure Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.outbounds.map((outbounds) => (
-                <tr>
-                  <td> {outbounds.rank} </td>
-                  <td> {outbounds.firstName} </td>
-                  <td> {outbounds.lastName} </td>
-                  <td> {outbounds.departureDate}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          */
