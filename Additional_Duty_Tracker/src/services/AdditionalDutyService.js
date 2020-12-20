@@ -20,13 +20,18 @@ class AdditionalDutyService {
   }
 
   createDuty(duty) {
-    return axios.post(ADDITIONAL_DUTY_API_BASE_URL, duty, 
-      {headers: {'Content-Type': 'application/json'}});
+    return axios.post(ADDITIONAL_DUTY_API_BASE_URL, duty, {
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   updateDuty(dutyId, duty) {
-    return axios.put(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId, duty,
-    {headers: {'Content-Type': 'application/json'}});
+    return axios.patch(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId, duty, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
   }
 
   deleteDuty(dutyId) {

@@ -90,15 +90,6 @@ public class Controller {
         return "Deleted additional duty";
     }
 
-//    @PostMapping("/duties")
-//    public AdditionalDuty addDuty(@Param("title") String title, @Param("member_id") Long id, @Param("workload") Integer workload) {
-//        AdditionalDuty additionalDuty = new AdditionalDuty();
-//        additionalDuty.setTitle(title);
-//        additionalDuty.setMember_id(id);
-//        additionalDuty.setWorkload(workload);
-//        return this.additionalDutyRepository.save(additionalDuty);
-//    }
-
     @PostMapping("/duties")
     public AdditionalDuty addDuty(@RequestBody AdditionalDuty additionalDuty) {
         return this.additionalDutyRepository.save(additionalDuty);
