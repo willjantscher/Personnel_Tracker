@@ -20,11 +20,11 @@ class AdditionalDutyService {
   }
 
   createDuty(duty) {
-    return axios.post(ADDITIONAL_DUTY_API_BASE_URL);
+    return axios.post(ADDITIONAL_DUTY_API_BASE_URL, duty, {     headers: {         'Content-Type': 'application/json'     } })
   }
 
-  updateDuty(duty, dutyId) {
-    return axios.put(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId);
+  updateDuty(dutyId, duty) {
+    return axios.put(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId, duty);
   }
 
   deleteDuty(dutyId) {

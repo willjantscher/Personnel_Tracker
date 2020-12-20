@@ -4,6 +4,8 @@ package com.example.demo;
 //docker-compose down -v
 
 
+import net.bytebuddy.implementation.bytecode.Addition;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -88,15 +90,29 @@ public class Controller {
         return "Deleted additional duty";
     }
 
-    //    @PatchMapping("/duties/{duty_id}")
-//    public AdditionalDuty editDuty(@RequestBody AdditionalDuty input, @PathVariable Long duty_id) {
-//        AdditionalDuty editThis = this.additionalDutyRepository.findById(duty_id).get();
-//        editThis.setDuty_id(input.getDuty_id());
-//        editThis.setTitle(input.getTitle());
-//        editThis.setMember_id(input.getMember_id());
-//        editThis.setWorkload(input.getWorkload());
-//        return this.additionalDutyRepository.save(editThis);
+//    @PostMapping("/duties")
+//    public AdditionalDuty addDuty(@Param("title") String title, @Param("member_id") Long id, @Param("workload") Integer workload) {
+//        AdditionalDuty additionalDuty = new AdditionalDuty();
+//        additionalDuty.setTitle(title);
+//        additionalDuty.setMember_id(id);
+//        additionalDuty.setWorkload(workload);
+//        return this.additionalDutyRepository.save(additionalDuty);
 //    }
+
+    @PostMapping("/duties")
+    public AdditionalDuty addDuty(@RequestBody AdditionalDuty additionalDuty) {
+        return this.additionalDutyRepository.save(additionalDuty);
+    }
+
+    @PatchMapping("/duties/{duty_id}")
+    public AdditionalDuty editDuty(@RequestBody AdditionalDuty input, @PathVariable Long duty_id) {
+        AdditionalDuty editThis = this.additionalDutyRepository.findById(duty_id).get();
+        editThis.setDuty_id(input.getDuty_id());
+        editThis.setTitle(input.getTitle());
+        editThis.setMember_id(input.getMember_id());
+        editThis.setWorkload(input.getWorkload());
+        return this.additionalDutyRepository.save(editThis);
+    }
 
 
 

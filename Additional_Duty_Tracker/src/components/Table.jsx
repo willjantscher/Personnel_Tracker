@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AdditionalDutyService from "../services/AdditionalDutyService";
+import MemberService from "../services/MemberService";
 import AddForm from "./AddForm";
 
 class Table extends Component {
@@ -8,21 +9,55 @@ class Table extends Component {
 
     this.state = {
       duties: [],
-      showAddForm: false
+      members: [],
+      showAddForm: false,
+      showSuccessMessage: false,
+      // Form inputs:
+      title: '',
+      member_id: null,
+      workload: 10
     };
 
-    // this.addDuty = this.addDuty.bind(this);
-    // this.editDuty = this.editDuty.bind(this);
     this.deleteDuty = this.deleteDuty.bind(this);
     this.viewAll = this.viewAll.bind(this);
     this.viewUnassigned = this.viewUnassigned.bind(this);
     this.addDuty = this.addDuty.bind(this);
+    this.changeTitleHandler = this.changeTitleHandler.bind(this);
+    this.changeMemberHandler = this.changeMemberHandler.bind(this);
+    this.changeWorkloadHandler = this.changeWorkloadHandler.bind(this);
     this.submitAddDuty = this.submitAddDuty.bind(this);
   }
 
   componentDidMount() {
     AdditionalDutyService.getDutiesDetails().then((res) => {
-      this.setState({ duties: res.data });
+      this.setState({ duties: res.data
+        .sort(function(a, b) {
+          var nameA = a.title.toUpperCase(); // ignore upper and lowercase
+          var nameB = b.title.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return -1; //nameA comes first
+          } else if (nameA > nameB) {
+            return 1; // nameB comes first
+          } else {
+            return 0;  // names must be equal
+          }
+        })
+      })
+    }),
+    MemberService.getMembers().then((res) => {
+      this.setState({ members: res.data
+        .sort(function(a, b) {
+          var nameA = a.last_name.toUpperCase(); // ignore upper and lowercase
+          var nameB = b.last_name.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return -1; //nameA comes first
+          } else if (nameA > nameB) {
+            return 1; // nameB comes first
+          } else {
+            return 0;  // names must be equal
+          }
+        })
+      });
     });
   }
 
@@ -45,34 +80,44 @@ class Table extends Component {
   }
 
   addDuty() {
-    this.setState({ showAddForm: true });
+    this.setState({ 
+      showAddForm: true, 
+      showSuccessMessage: false
+    });
+  }
+
+  changeTitleHandler(e) {
+    this.setState({title: e.target.value});
+  }
+
+  changeMemberHandler(e) {
+    this.setState({member_id: e.target.value});
+  }
+
+  changeWorkloadHandler(e) {
+    this.setState({workload: e.target.value});
   }
 
   submitAddDuty(e) {
     e.preventDefault();
-    let [dutyTitle, assignment, workload] = Array.from(e.target.elements).slice(0,3).map(element => element.value);
-
-    // https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples 
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: dutyTitle,
-          member_id: assignment,
-          workload: workload,
-        })
-    };
-
-    AdditionalDutyService.createDuty(requestOptions).then((res) => {
-        this.setState({ duties: res.data, showAddForm: false });
+    const duty = JSON.stringify({
+      title: this.state.title,
+      member_id: parseInt(this.state.member_id),
+      workload: parseInt(this.state.workload),
     });
+    AdditionalDutyService.createDuty(duty).then((res) => {
+      this.componentDidMount();
+      console.log("Added " + duty);
+      this.setState({showSuccessMessage: true});
+      this.setState({showAddForm: false});
+    })
   }
 
 
   colorizeRow(duty) {
       if (!duty.last_name) {
         return "table-danger"
-      } else if (duty.has_assignment === 1) {
+      } else if (duty.departure_date) {
         return "table-warning"
       } else {
         return "table-success"
@@ -106,7 +151,14 @@ class Table extends Component {
                 Add a New Duty
               </button>
             </h3>
-            {this.state.showAddForm ? <AddForm /> : null}
+            {this.state.showAddForm ? <AddForm 
+            members={this.state.members} 
+            onTitleInput={this.changeTitleHandler}
+            onMemberSelect={this.changeMemberHandler}
+            onWorkloadInput={this.changeWorkloadHandler}
+            onSubmitForm={this.submitAddDuty} /> : null}
+            {this.state.showSuccessMessage ? 
+            <p className="text-success">Success!</p> : null}
           </div>
         </div>
         <br />
