@@ -12,10 +12,16 @@ class Table extends Component {
       members: [],
       showAddForm: false,
       showSuccessMessage: false,
-      // Form inputs:
+      showEditForm: false,
+      // Add form inputs:
       title: '',
       member_id: null,
-      workload: 10
+      workload: 10, //default value
+      // Edit form inputs:
+      editDuty_id: null,
+      editTitle: '',
+      editMember_id: null,
+      editWorkload: null,
     };
 
     this.deleteDuty = this.deleteDuty.bind(this);
@@ -26,39 +32,37 @@ class Table extends Component {
     this.changeMemberHandler = this.changeMemberHandler.bind(this);
     this.changeWorkloadHandler = this.changeWorkloadHandler.bind(this);
     this.submitAddDuty = this.submitAddDuty.bind(this);
+    this.hideAddForm = this.hideAddForm.bind(this);
+    this.editDuty = this.editDuty.bind(this);
+    this.editTitleHandler = this.editTitleHandler.bind(this);
+    this.editMemberHandler = this.editMemberHandler.bind(this);
+    this.editWorkloadHandler = this.editWorkloadHandler.bind(this);
+    this.submitEditDuty = this.submitEditDuty.bind(this);
   }
 
   componentDidMount() {
     AdditionalDutyService.getDutiesDetails().then((res) => {
       this.setState({ duties: res.data
-        .sort(function(a, b) {
-          var nameA = a.title.toUpperCase(); // ignore upper and lowercase
-          var nameB = b.title.toUpperCase(); // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1; //nameA comes first
-          } else if (nameA > nameB) {
-            return 1; // nameB comes first
-          } else {
-            return 0;  // names must be equal
-          }
-        })
+        .sort((a, b) => this.sortAlphabetically(a.title, b.title))
       })
     }),
     MemberService.getMembers().then((res) => {
       this.setState({ members: res.data
-        .sort(function(a, b) {
-          var nameA = a.last_name.toUpperCase(); // ignore upper and lowercase
-          var nameB = b.last_name.toUpperCase(); // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1; //nameA comes first
-          } else if (nameA > nameB) {
-            return 1; // nameB comes first
-          } else {
-            return 0;  // names must be equal
-          }
-        })
+        .sort((a, b) => this.sortAlphabetically(a.last_name, b.last_name))
       });
     });
+  }
+  
+  sortAlphabetically(a, b) {
+    let nameA = a.toUpperCase(); // ignore upper and lowercase
+    let nameB = b.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1; //nameA comes first
+    } else if (nameA > nameB) {
+      return 1; // nameB comes first
+    } else {
+      return 0;  // names must be equal
+    }
   }
 
   viewAll() {
@@ -107,12 +111,56 @@ class Table extends Component {
     });
     AdditionalDutyService.createDuty(duty).then((res) => {
       this.componentDidMount();
-      console.log("Added " + duty);
+      console.log("Added " + res.data);
       this.setState({showSuccessMessage: true});
       this.setState({showAddForm: false});
     })
   }
 
+  hideAddForm() {
+    this.setState({showAddForm: false})
+  }
+
+  editDuty(id) {
+    AdditionalDutyService.getDutyById(id).then((res) => {
+      let duty = res.data;
+      console.log("editing " + duty.title);
+      this.setState({
+        showEditForm: true,
+        editDuty_id: duty.duty_id,
+        editTitle: duty.title,
+        editMember_id: duty.member_id,
+        editWorkload: duty.workload
+      })
+    })
+  }
+
+  editTitleHandler(e) {
+    this.setState({editTitle: e.target.value});
+  }
+
+  editMemberHandler(e) {
+    this.setState({editMember_id: e.target.value});
+  }
+
+  editWorkloadHandler(e) {
+    this.setState({editWorkload: e.target.value});
+  }
+
+  submitEditDuty(e) {
+    e.preventDefault();
+    const duty = JSON.stringify({
+      title: this.state.editTitle,
+      member_id: parseInt(this.state.editMember_id),
+      workload: parseInt(this.state.editWorkload),
+    });
+    AdditionalDutyService.updateDuty(id, duty).then((res) => {
+      this.componentDidMount();
+      console.log("Changes made: " + duty);
+      // this.setState({showSuccessMessage: true});
+      this.setState({showEditForm: false});
+    })
+  }
 
   colorizeRow(duty) {
       if (!duty.last_name) {
@@ -156,7 +204,8 @@ class Table extends Component {
             onTitleInput={this.changeTitleHandler}
             onMemberSelect={this.changeMemberHandler}
             onWorkloadInput={this.changeWorkloadHandler}
-            onSubmitForm={this.submitAddDuty} /> : null}
+            onSubmitForm={this.submitAddDuty} 
+            onHideForm={this.hideAddForm} /> : null}
             {this.state.showSuccessMessage ? 
             <p className="text-success">Success!</p> : null}
           </div>
@@ -177,7 +226,7 @@ class Table extends Component {
             <tbody>
               {this.state.duties.map((duty) => (
                 <tr
-                  key={duty.id}
+                  key={duty.duty_id}
                   className={this.colorizeRow(duty)}>
                   <td> {duty.title} </td>
                   <td> {duty.last_name} </td>
@@ -185,7 +234,8 @@ class Table extends Component {
                   <td> {duty.paygrade} </td>
                   <td> {duty.workload} </td>
                   <td>
-                    <button
+                    <button type="button" 
+                      onClick={() => this.editDuty(duty.duty_id)}
                       className="btn btn-sm btn-success"
                     >
                       Edit
