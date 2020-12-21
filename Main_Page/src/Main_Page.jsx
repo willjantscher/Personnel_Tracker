@@ -23,9 +23,6 @@ class Main_Page extends React.Component {
   render() {
     return (
       <Router>
-        <div className="alert-danger text-center">
-          THIS SITE CONTAINS PERSONALLY IDENTIFIABLE INFORMATION
-        </div>
         <div className="wrapper">
           <div className="row mt-4">
             {/* <div className="col-md-4">
@@ -58,7 +55,6 @@ class Main_Page extends React.Component {
               </h3>
             </div>
             <div className="col-md-3"></div>
-            
           </div>
 
           <div id="content" className="info">
@@ -70,13 +66,15 @@ class Main_Page extends React.Component {
 
         <Route className="row justify-content-center" exact path="/main">
           <p className="text-center mt-5">
-          <img
-            className="justify-content-center"
-            src={"https://media1.giphy.com/media/eIa61FAucY1sVbxsu5/giphy.gif"}
-            width="500"
-            alt="loading awesomeness"
-          />
-        </p>
+            <img
+              className="justify-content-center"
+              src={
+                "https://media1.giphy.com/media/eIa61FAucY1sVbxsu5/giphy.gif"
+              }
+              width="500"
+              alt="loading awesomeness"
+            />
+          </p>
         </Route>
       </Router>
     );

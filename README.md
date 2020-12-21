@@ -1,4 +1,10 @@
-# Personnel_Tracker
+# Squadron Personnel_Tracker
+
+## Links
+
+#### Github
+
+The github repository that holds all of the code for this project is located here: [Personnel Tracker Github](https://github.com/willjantscher/Personnel_Tracker)
 
 Github link
 https://github.com/willjantscher/Personnel_Tracker
