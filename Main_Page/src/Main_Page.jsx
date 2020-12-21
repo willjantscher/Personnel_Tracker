@@ -71,9 +71,7 @@ class Main_Page extends React.Component {
           <p className="text-center mt-5">
             <img
               className="justify-content-center"
-              src={
-                USSF_GIF
-              }
+              src={USSF_GIF}
               width="500"
               alt="loading awesomeness"
             />
