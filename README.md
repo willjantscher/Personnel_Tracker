@@ -20,6 +20,8 @@ The main page greets the user and offers several services. First, the user can a
 
 ### OPR/EPR Tracker - Caden Reynolds
 
+Allows the user to see what the current opr_epr_status of everyone in the unit is. The user has the ability to filter people based on their current opr_epr_status and they can also change the status of anyone in the unit. When a status is changed it sends a patch request to the server to update their opr_epr_status. 
+
 ### Additional Duty Tracker - Emily Hosoya
 
 This service displays a list of additional duties within the unit. Admins can add a new duty title, assign it to an individual, and set its estimated workload. They can also make changes to an existing position.
