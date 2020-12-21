@@ -9,7 +9,6 @@ const ListMembers = (props) => {
       });
 
     let outboundMembers = props.memberList.filter((outboundMember) => (outboundMember.departure_date !== null));   
-
     outboundMembers = outboundMembers.map((outbounds) => {
       outbounds.departure_date = outbounds.departure_date.slice(0,10);
       return outbounds; 

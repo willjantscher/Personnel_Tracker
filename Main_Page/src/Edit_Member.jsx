@@ -37,7 +37,7 @@ const Edit_Member = (props) => {
     <div>
       <h2>Edit Member Data</h2>
       <form onSubmit={props.onEditMember}>
-        <div>
+        <div className="pt-2">
           <span>Paygrade: </span>
           <select
             id="paygrade"
@@ -106,10 +106,10 @@ const Edit_Member = (props) => {
             onChange={props.onInputChange}
             defaultValue={props.member.opr_epr_status}
           >
-            <option value="not-due">Not Due</option>
-            <option value="created">Created</option>
-            <option value="routed">Routed</option>
-            <option value="completed">Completed</option>
+            <option value="Not Due">Not Due</option>
+            <option value="Created">Created</option>
+            <option value="Routed">Routed</option>
+            <option value="Completed">Completed</option>
           </select>
         </div>
 
@@ -172,8 +172,9 @@ const Edit_Member = (props) => {
             onChange={props.onInputChange}
           ></input>
         </div> */}
-        <div></div>
-        <input type="submit" value="Update Member Data" />
+        <div className="pt-3">
+          <input type="submit" value="Update Member Data" />
+        </div>
       </form>
     </div>
   );

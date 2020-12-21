@@ -2,11 +2,11 @@ import React from "react";
 
 const Add_Member = (props) => {
   return (
-    <div>
+    <div className="pt-2">
       <h3>Add Member</h3>
 
       <form onSubmit={props.onAddMember}>
-        <div>
+        <div className="pt-2">
           <span>Paygrade: </span>
           <select id="paygrade" defaultValue="" onChange={props.onInputChange}>
             <option value=""></option>
@@ -67,12 +67,12 @@ const Add_Member = (props) => {
           <select
             id="opr_epr_status"
             onChange={props.onInputChange}
-            defaultValue="not-due"
+            defaultValue="Not Due"
           >
-            <option value="not-due">Not Due</option>
-            <option value="created">Created</option>
-            <option value="routed">Routed</option>
-            <option value="completed">Completed</option>
+            <option value="Not Due">Not Due</option>
+            <option value="Created">Created</option>
+            <option value="Routed">Routed</option>
+            <option value="Completed">Completed</option>
           </select>
         </div>
 
@@ -113,8 +113,9 @@ const Add_Member = (props) => {
             type="date"
           ></input>
         </div>
-
-        <input type="submit" value="Add Member to Database" />
+        <div className="pt-3">
+         <input type="submit" value="Add Member to Database" />
+        </div>
       </form>
     </div>
   );

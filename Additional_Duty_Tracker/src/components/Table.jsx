@@ -92,6 +92,7 @@ class Table extends Component {
   addDuty() {
     this.setState({
       showAddForm: true,
+      showEditForm: false,
       showSuccessMessage: false,
     });
   }
@@ -124,7 +125,10 @@ class Table extends Component {
   }
 
   hideAddForm() {
-    this.setState({ showAddForm: false });
+    this.setState({ 
+      showAddForm: false, 
+      showSuccessMessage: false 
+    });
   }
 
   editDuty(id) {
@@ -133,6 +137,8 @@ class Table extends Component {
       console.log("editing " + duty.title);
       this.setState({
         showEditForm: true,
+        showAddForm: false,
+        showSuccessMessage: false,
         editDuty_id: duty.duty_id,
         editTitle: duty.title,
         editMember_id: duty.member_id,
@@ -168,7 +174,10 @@ class Table extends Component {
   }
 
   hideEditForm() {
-    this.setState({ showEditForm: false });
+    this.setState({ 
+      showEditForm: false,
+      showSuccessMessage: false 
+    });
   }
 
   colorizeRow(duty) {
