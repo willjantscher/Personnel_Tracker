@@ -3,11 +3,13 @@ import React from "react";
 const Add_Member = (props) => {
   return (
     <div>
-      <h2>Add Member</h2>
-      <form>
+      <h3>Add Member</h3>
+
+      <form onSubmit={props.onAddMember}>
         <div>
-          <span>Rank: </span>
-          <select>
+          <span>Paygrade: </span>
+          <select id="paygrade" defaultValue="" onChange={props.onInputChange}>
+            <option value=""></option>
             <option value="E1">E1</option>
             <option value="E2">E2</option>
             <option value="E3">E3</option>
@@ -29,54 +31,89 @@ const Add_Member = (props) => {
             <option value="O10">O10</option>
           </select>
         </div>
+
         <div>
           <span>First Name: </span>
           <input
+            className="form-label"
             name="first name"
-            id="0"
+            id="first_name"
             placeholder="First Name"
             onChange={props.onInputChange}
           ></input>
         </div>
+
         <div>
           <span>Last Name: </span>
           <input
             name="last name"
-            id="1"
+            id="last_name"
             placeholder="Last Name"
             onChange={props.onInputChange}
           ></input>
         </div>
+
         <div>
           <span>Birthday: </span>
-          <input type="date"></input>
+          <input
+            id="birthday"
+            onChange={props.onInputChange}
+            type="date"
+          ></input>
         </div>
+
+        <div>
+          <span>Opr/Epr Status</span>
+          <select
+            id="opr_epr_status"
+            onChange={props.onInputChange}
+            defaultValue="not-due"
+          >
+            <option value="not-due">Not Due</option>
+            <option value="created">Created</option>
+            <option value="routed">Routed</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+
+        <div>
+          <span>Has Assignment</span>
+          <input
+            id="has_assignment"
+            value="0"
+            onChange={props.onInputChange}
+            type="radio"
+            name="hasAssignment"
+          ></input>
+          <span>Yes</span>
+          <input
+            id="no_assignment"
+            value="1"
+            onChange={props.onInputChange}
+            type="radio"
+            name="hasAssignment"
+          ></input>
+          <span>No</span>
+        </div>
+
         <div>
           <span>Arrival Date: </span>
-          <input type="date"></input>
+          <input
+            id="arrival_date"
+            onChange={props.onInputChange}
+            type="date"
+          ></input>
         </div>
+
         <div>
           <span>Departure Date: </span>
-          <input type="date"></input>
-        </div>
-        <div>
-          <span>Rater First Name: </span>
           <input
-            name="rater first name"
-            id="10"
-            placeholder="First Name"
+            id="departure_date"
             onChange={props.onInputChange}
+            type="date"
           ></input>
         </div>
-        <div>
-          <span>Rater Last Name: </span>
-          <input
-            name="rater last name"
-            id="11"
-            placeholder="Last Name"
-            onChange={props.onInputChange}
-          ></input>
-        </div>
+
         <input type="submit" value="Add Member to Database" />
       </form>
     </div>

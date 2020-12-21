@@ -1,23 +1,43 @@
 import React from "react";
 
 function PersonListItem({ members, onChange }) {
+
+
+  
+  var row = 1;
+
   let list = members.map((member) => (
-    <li>
-      {" "}
-      {member.first_name} {member.last_name}{" "}
-      <select name="status" onChange={onChange}>
+    <tr>
+      <th scope="row">{row++}</th>
+      <td>{member.first_name}</td>
+      <td>{member.last_name}</td>
+      <td>
+      <select name="status" className="custom-select" onChange={onChange} member_id={member.member_id} defaultValue={member.opr_epr_status}>
         <option value="not-due">Not Due</option>
         <option value="created">Created</option>
         <option value="routed">Routed</option>
         <option value="completed">Completed</option>
-      </select>
-    </li>
+      </select>  
+      </td> 
+    </tr>
   ));
 
   return (
-    <div>
-      <ol>{list}</ol>
-    </div>
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {list}
+      </tbody>
+    </table>
+      
+    
   );
 }
 

@@ -1,23 +1,30 @@
 import axios from "axios";
 
-const ADDITIONAL_DUTY_API_BASE_URL =
-  "http://localhost:9004/api/v1/additional-duty";
+const ADDITIONAL_DUTY_API_BASE_URL = "http://localhost:8080/duties";
 
 class AdditionalDutyService {
   getDuties() {
     return axios.get(ADDITIONAL_DUTY_API_BASE_URL);
   }
 
-  createDuty(duty) {
-    return axios.post(ADDITIONAL_DUTY_API_BASE_URL, duty);
+  getDutiesDetails() {
+    return axios.get(ADDITIONAL_DUTY_API_BASE_URL + "/details");
   }
 
   getDutyById(dutyId) {
     return axios.get(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId);
   }
 
+  getUnassignedDuties() {
+    return axios.get(ADDITIONAL_DUTY_API_BASE_URL + "/unassigned");
+  }
+
+  createDuty(duty) {
+    return axios.post(ADDITIONAL_DUTY_API_BASE_URL);
+  }
+
   updateDuty(duty, dutyId) {
-    return axios.put(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId, duty);
+    return axios.put(ADDITIONAL_DUTY_API_BASE_URL + "/" + dutyId);
   }
 
   deleteDuty(dutyId) {
