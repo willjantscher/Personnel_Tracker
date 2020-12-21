@@ -37,7 +37,7 @@ const Edit_Member = (props) => {
     <div>
       <h2>Edit Member Data</h2>
       <form onSubmit={props.onEditMember}>
-        <div>
+        <div className="pt-2">
           <span>Paygrade: </span>
           <select
             id="paygrade"
@@ -172,8 +172,9 @@ const Edit_Member = (props) => {
             onChange={props.onInputChange}
           ></input>
         </div> */}
-        <div></div>
-        <input type="submit" value="Update Member Data" />
+        <div className="pt-3">
+          <input type="submit" value="Update Member Data" />
+        </div>
       </form>
     </div>
   );

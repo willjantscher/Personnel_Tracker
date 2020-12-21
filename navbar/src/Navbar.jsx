@@ -1,12 +1,26 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import scorp from './scorp.png'
+
 class Navbar extends Component {
   render() {
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
+
+            <a className="pr-4">
+              <img
+                className="justify-content-center"
+                src={
+                  scorp
+                }
+                width="45"
+                alt="loading awesomeness"
+              />
+            </a>
+
             <a className="navbar-brand" href="/main">
               Personnel Tracker
             </a>
