@@ -25,6 +25,9 @@ class Main_Page extends React.Component {
       <Router>
         <div className="wrapper">
           <div className="row mt-4">
+            {/* <div className="col-md-4">
+            <h3>Welcome to the Main Page</h3>
+          </div> */}
             <div className="col-md-1"></div>
             <div className="col-md-8">
               <h3>
@@ -54,10 +57,6 @@ class Main_Page extends React.Component {
             <div className="col-md-3"></div>
           </div>
 
-          <pre className="text-center mt-4">
-            <h1>---------- Welcome Guardian ----------</h1>
-          </pre>
-
           <div id="content" className="info">
             <Route path="/main/SearchMember" component={SearchMember} />
             <Route path="/main/Alpha_Roster" component={AlphaRoster} />
@@ -66,6 +65,9 @@ class Main_Page extends React.Component {
         </div>
 
         <Route className="row justify-content-center" exact path="/main">
+          <pre className="text-center mt-4">
+            <h1>----------     Welcome Guardian     ----------</h1>
+          </pre>
           <p className="text-center mt-5">
             <img
               className="justify-content-center"
@@ -182,7 +184,7 @@ class SearchMember extends Component {
           <div className="col-md-1"></div>
 
           <div className="col-lg-10">
-            <h3>Select a member to see their data</h3>
+            <h3 className=" pb-2 pt-2">Select a member to see their data</h3>
             <Search_Member
               members={this.state.members}
               onSelectMember={this.handleSelectMember}
@@ -193,13 +195,16 @@ class SearchMember extends Component {
                   return (
                     // <Redirect to="/main"/>
                     <div>
-                      <div></div>
+                      <div className="pt-4">
                       <Display_Member member={this.state.selectedMember} />
-                      <Edit_Member
-                        member={this.state.selectedMember}
-                        onEditMember={this.handleEditMember}
-                        onInputChange={this.handleInputChange}
+                      </div>  
+                      <div className="pt-2">
+                        <Edit_Member
+                          member={this.state.selectedMember}
+                          onEditMember={this.handleEditMember}
+                          onInputChange={this.handleInputChange}
                       />
+                      </div>
                     </div>
                   );
                 default:
@@ -294,7 +299,7 @@ class AlphaRoster extends Component {
       <div className="row">
         <div className="col-lg-1"></div>
         <div className="col-lg-8">
-          <h3>Alpha Roster</h3>
+          <h3 className="text-center pt-2 pb-3">----------     Alpha Roster     ----------</h3>
           <table className="table table-striped table-bordered table-hover table-light">
             <thead className="thead-dark">
               <tr>
@@ -400,7 +405,9 @@ class AddMember extends Component {
         <div className="row">
           <div className="col-md-1"></div>
           <div className="col-md-8">
-            <Display_Member member={this.state.member} />
+            <div className="pt-3">
+              <Display_Member member={this.state.member} />
+            </div>
             <Add_Member
               onAddMember={this.handleAddMember}
               onInputChange={this.handleInputChange}

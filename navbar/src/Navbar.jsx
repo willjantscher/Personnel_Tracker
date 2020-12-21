@@ -10,8 +10,7 @@ class Navbar extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
 
-
-            <a className="">
+            <a className="pr-4">
               <img
                 className="justify-content-center"
                 src={
@@ -22,7 +21,7 @@ class Navbar extends Component {
               />
             </a>
 
-            <a className="navbar-brand pl-3" href="/main">
+            <a className="navbar-brand" href="/main">
               Personnel Tracker
             </a>
             <button
@@ -58,9 +57,6 @@ class Navbar extends Component {
                 </li>
               </ul>
             </div>
-
-
-
           </div>
         </nav>
         <div className="alert-danger text-center">
