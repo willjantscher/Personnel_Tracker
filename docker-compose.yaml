@@ -26,6 +26,11 @@ services:
     ports:
       - 9004:9004
 
+  navbar:
+    build: navbar
+    ports:
+      - 9005:9005
+
   users-db:
     build: _Database
     image: mysql:8
