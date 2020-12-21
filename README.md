@@ -17,3 +17,7 @@ https://docs.google.com/document/d/14IxhGOW_coKxupkZpobb3MrdLyeHSTVQZ58ZoauzqwE/
 Tutorials
 https://www.freecodecamp.org/news/developing-and-deploying-micro-frontends-with-single-spa/
 https://blog.bitsrc.io/how-to-develop-microfrontends-using-react-step-by-step-guide-47ebb479cacd
+
+## Who worked on what
+
+Caden Reynolds - Single-Spa, OPR_EPR_Tracker, patch method for opr_epr_status, docker, navbar
