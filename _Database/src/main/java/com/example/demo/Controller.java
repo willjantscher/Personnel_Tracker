@@ -12,15 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
-@CrossOrigin(origins="*")
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
-
 @RestController
-@CrossOrigin
+@CrossOrigin(origins="*")
+
 public class Controller {
 
     private final MemberRepository memberRepository;
@@ -55,6 +54,7 @@ public class Controller {
   
     @PatchMapping("/members/edit-member/{member_id}")
     public Member patchMember (@PathVariable Long member_id, @RequestBody Member member) {
+        this.memberRepository.save(member);
         return member;
     }
 
