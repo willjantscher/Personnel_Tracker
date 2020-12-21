@@ -106,10 +106,10 @@ const Edit_Member = (props) => {
             onChange={props.onInputChange}
             defaultValue={props.member.opr_epr_status}
           >
-            <option value="not-due">Not Due</option>
-            <option value="created">Created</option>
-            <option value="routed">Routed</option>
-            <option value="completed">Completed</option>
+            <option value="Not Due">Not Due</option>
+            <option value="Created">Created</option>
+            <option value="Routed">Routed</option>
+            <option value="Completed">Completed</option>
           </select>
         </div>
 
