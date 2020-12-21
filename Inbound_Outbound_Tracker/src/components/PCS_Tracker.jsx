@@ -7,13 +7,15 @@ import ListMembers from "./ListMembers";
 class PCS_Tracker extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { memberList: [{}] };
+    this.state = { memberList: [] };
   }
 
   componentDidMount() {
     fetch(`http://localhost:8080/members`)
       .then((res) => res.json())
-      .then((data) => this.setState({ memberList: data }));
+      .then((data) => this.setState({ memberList: this.state.memberList.concat(data) }))
+      .catch(error => console.log("Error" + error));
+
     //this.getData();
   }
 
