@@ -12,7 +12,7 @@ import Display_Member from "./Display_Member";
 
 // import "./Main_Page.css";
 
-import USSF_GIF from "./Photos/USSF_GIF.gif"
+import USSF_GIF from "./Photos/USSF_GIF.gif";
 // import USSF_LOGO from "./Photos/USSF_LOGO.png"
 
 class Main_Page extends React.Component {
@@ -69,9 +69,7 @@ class Main_Page extends React.Component {
           <p className="text-center mt-5">
             <img
               className="justify-content-center"
-              src={
-                USSF_GIF
-              }
+              src={USSF_GIF}
               width="500"
               alt="loading awesomeness"
             />
