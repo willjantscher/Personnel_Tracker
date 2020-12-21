@@ -21,6 +21,12 @@ registerApplication({
   activeWhen: ["/pcs"],
 });
 
+registerApplication({
+  name: "@team-6/additional-duty-tracker",
+  app: () => System.import("@team-6/additional-duty-tracker"),
+  activeWhen: ["/duties"],
+});
+
 // registerApplication({
 //   name: "@scorp/navbar",
 //   app: () => System.import("@scorp/navbar"),
