@@ -55,7 +55,7 @@ class Main_Page extends React.Component {
           </div>
 
           <pre className="text-center mt-4">
-            <h1>----------     Welcome Guardian     ----------</h1>
+            <h1>---------- Welcome Guardian ----------</h1>
           </pre>
 
           <div id="content" className="info">
