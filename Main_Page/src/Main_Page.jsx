@@ -25,9 +25,6 @@ class Main_Page extends React.Component {
       <Router>
         <div className="wrapper">
           <div className="row mt-4">
-            {/* <div className="col-md-4">
-            <h3>Welcome to the Main Page</h3>
-          </div> */}
             <div className="col-md-1"></div>
             <div className="col-md-8">
               <h3>
@@ -56,6 +53,10 @@ class Main_Page extends React.Component {
             </div>
             <div className="col-md-3"></div>
           </div>
+
+          <pre className="text-center mt-4">
+            <h1>----------     Welcome Guardian     ----------</h1>
+          </pre>
 
           <div id="content" className="info">
             <Route path="/main/SearchMember" component={SearchMember} />
