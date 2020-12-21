@@ -74,5 +74,8 @@ class OPR_EPR_Tracker extends React.Component {
             filteredMembers={this.state.filteredMembers}
           />
         </div>
->
-    />
+      </div>
+    )}
+}
+
+export default OPR_EPR_Tracker;
