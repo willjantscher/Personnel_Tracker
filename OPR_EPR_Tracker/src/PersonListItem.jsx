@@ -29,7 +29,7 @@ function PersonListItem({ members, onChange, filteredMembers, filter }) {
   ));
 
   return (
-    <table class="table table-striped table-sm">
+    <table className="table table-striped table-sm">
       <thead>
         <tr>
           <th scope="col">#</th>

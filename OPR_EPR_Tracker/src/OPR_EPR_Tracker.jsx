@@ -42,8 +42,10 @@ class OPR_EPR_Tracker extends React.Component {
   handleFilter(e) {
     if (e.target.value === "Filter by Status") {
       this.setState({ filter: false });
-    } else {      
-      let filtered = this.state.members.filter((member) => member.opr_epr_status === e.target.valueue)
+    } else {
+      let filtered = this.state.members.filter(
+        (member) => member.opr_epr_status === e.target.value
+      );
       this.setState({ filter: true, filteredMembers: filtered });
     }
   }
@@ -56,8 +58,9 @@ class OPR_EPR_Tracker extends React.Component {
             className="form-select"
             aria-label="Default select example"
             onChange={this.handleFilter.bind(this)}
+            defaultValue={"Filter by Status"}
           >
-            <option selected>Filter by Status</option>
+            <option value="Filter by Status">Filter by Status</option>
             <option value="not-due">Not Due</option>
             <option value="pending">Pending</option>
             <option value="created">Created</option>
@@ -75,7 +78,8 @@ class OPR_EPR_Tracker extends React.Component {
           />
         </div>
       </div>
-    )}
+    );
+  }
 }
 
 export default OPR_EPR_Tracker;
