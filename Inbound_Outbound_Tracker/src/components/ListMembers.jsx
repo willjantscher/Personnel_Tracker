@@ -1,13 +1,19 @@
 import React from "react";
 
 const ListMembers = (props) => {
-   let arrival_date = "";
-    //let departure_date = "";
     
-    let inboundMembers = props.memberList.filter((inboundMember) => (inboundMember.arrival_date !== null))
-    //inboundMembers.forEach((member) => {return (member.arrival_date = member.arrival_date)});
-    //inboundMembers = inboundMembers.map((inbounds) => {(inbounds.arrival_date = (inbounds.arrival_date).substring(0,10)); console.log(inbounds.arrival_date);});
+    let inboundMembers = props.memberList.filter((inboundMember) => (inboundMember.arrival_date !== null));
+    inboundMembers = inboundMembers.map((inbounds) => {
+      inbounds.arrival_date = inbounds.arrival_date.slice(0,10);
+      return inbounds; 
+      });
+
     let outboundMembers = props.memberList.filter((outboundMember) => (outboundMember.departure_date !== null));   
+
+    outboundMembers = outboundMembers.map((outbounds) => {
+      outbounds.departure_date = outbounds.departure_date.slice(0,10);
+      return outbounds; 
+      });
 
   return (
     <div>
