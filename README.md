@@ -10,7 +10,7 @@ Recommended use: use npm start inside of each of the micro-applications to boot.
 
 The page will now be accessible at http://localhost:9000/main
 
-> Note: If running each of these services independantly, you will need to run npm install inside of each of the respective directories to install the required dependencies.
+> Note: If running each of these services independantly, you will need to run npm install inside of each of the respective directories to install the required dependencies. Run npm install file-loader --save-dev in the navbar.
 
 ### Main Page - Will Jantscher
 
