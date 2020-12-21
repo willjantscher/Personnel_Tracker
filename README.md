@@ -2,9 +2,17 @@
 
 ## Links
 
-#### Github
+### Github
 
-The github repository that holds all of the code for this project is located here: [Personnel Tracker Github](https://github.com/willjantscher/Personnel_Tracker)
+The github repository that holds all of the code for this project is located here: [Personnel Tracker Github](https://github.com/willjantscher/Personnel_Tracker).
+
+### Trello
+User stories were written and tracked using Trello: [Personnel Tracker Trello](https://trello.com/b/jq9sAJrF/kanban-template).
+
+### Draw.io
+The structure of this project, as well as the database Entity Relationship Diagram, were mapped out using draw.io: [Personnel Tracker Draw.io](https://app.diagrams.net/#G1SoA0oDOcl7YvjJj9s4STxNKjDo51wB9l).
+
+
 
 Github link
 https://github.com/willjantscher/Personnel_Tracker
