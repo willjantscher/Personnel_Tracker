@@ -20,7 +20,20 @@ class OPR_EPR_Tracker extends React.Component {
   }
 
   handleOnchangeStatus(e) {
-    let status = e.target.value;
+    let value = e.target.value;
+    let member_id = e.target.attributes.member_id.value;
+
+    var requestOptions = {
+      method: "PATCH",
+      "Access-Control-Allow-Methods": "Patch",
+      body: value,
+      redirect: "follow",
+    };
+
+    fetch(`http://localhost:8080/members/${member_id}`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   }
 
   render() {

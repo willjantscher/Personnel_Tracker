@@ -1,13 +1,13 @@
 import React from "react";
-import 'regenerator-runtime/runtime';
-import ListMembers from "./ListMembers"
+import "regenerator-runtime/runtime";
+import ListMembers from "./ListMembers";
 
 //http://single-spa-playground.org/playground/instant-test?name=@scorp/pcs&url=9003
 
 class PCS_Tracker extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { memberList: [{}] }
+    this.state = { memberList: [{}] };
   }
 
   componentDidMount() {
@@ -23,7 +23,6 @@ class PCS_Tracker extends React.Component {
       .then((data) => this.setState({ memberList: data }));
   }*/
 
-
   render() {
     return (
       <div className="container">
@@ -32,8 +31,8 @@ class PCS_Tracker extends React.Component {
             <h3>Inbounds/Outbounds</h3>
           </div>
         </div>
-        <br />        
-          <ListMembers memberList = {this.state.memberList}/>
+        <br />
+        <ListMembers memberList={this.state.memberList} />
       </div>
     );
   }
