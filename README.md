@@ -22,6 +22,10 @@ The main page greets the user and offers several services. First, the user can a
 
 ### Additional Duty Tracker - Emily Hosoya
 
+This service displays a list of additional duties within the unit. Admins can add a new duty title, assign it to an individual, and set its estimated workload. They can also make changes to an existing position.
+
+When an admin assigns a member to a duty, the member's name and rank appear alongside the duty title. Unassigned positions are highlighted in red and can be filtered. Yellow rows signify that this duty has an imminent departing member. These notify the squadron to reassign the responsibility to another member in the immediate future.
+
 ### Navigation Bar
 
 The navigation bar is mounted accross all routes in this application and provides links to the major micro-apps. It also includes the illustrious Team Scorp%co logo.
