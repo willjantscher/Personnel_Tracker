@@ -2,11 +2,17 @@
 This program is a basic personnel tracker that can be used by a squadron exec or secretary to better manage unit personnel. It has 4 seperate microservices that each add functionality along with a navigation bar (created as its own mini React app) and a Spring back end. These components were brought together using Single-SPA. Single-SPA is a javascript router for front-end microservices. It allows for the mounting and unmounting multiple micro-front-ends. To demonstrate the advantages of using Single-SPA, we have a react microservice for the navigation bar that is mounted to all paths. When we route to each of the four microservices, they are mounted/unmounted according to the filepath/nav button. However, the nav bar stays for all of the 4 microservices. 
 
 ## Program Structure
+Components can be mounted individually using npm start, or they can all be booted up together using docker-compose up in the Personnel_Tracker directory. Note: this takes a long time since the docker bootup process is not optimized.
+
+Recommended use: use npm start inside of each of the micro-applications to boot. Next, run npm start in the main directory (Personnel_Tracker) to boot up the Single-SPA router. To bring up the back-end, run docker-compose up inside of the _Database directory. Once the db has booted, run ./gradlew bootRun. 
+
+The page will now be accessible at http://localhost:9000/main
+
 
 ### Main Page - Will Jantscher
 
 
-## Inbound/Outbound Tracker - Aria LaFord
+### Inbound/Outbound Tracker - Aria LaFord
 
 
 ### OPR/EPR Tracker - Caden Reynolds
@@ -14,6 +20,12 @@ This program is a basic personnel tracker that can be used by a squadron exec or
 
 ### Additional Duty Tracker - Emily Hosoya
 
+
+### Navigation Bar
+
+
+### Spring Backend
+This includes a persistant database
 
 ### 
 
@@ -36,10 +48,7 @@ https://docs.google.com/spreadsheets/d/1kjatEi7_PU4e_tPREHIcNHC_EjJoZdk2y5DqUaTA
 https://www.freecodecamp.org/news/developing-and-deploying-micro-frontends-with-single-spa/
 https://blog.bitsrc.io/how-to-develop-microfrontends-using-react-step-by-step-guide-47ebb479cacd
 https://devcenter.heroku.com/articles/git#creating-a-heroku-remote
-
-
-
-
+https://webpack.js.org/loaders/file-loader/
 
 
 
