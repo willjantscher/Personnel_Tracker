@@ -67,12 +67,12 @@ const Add_Member = (props) => {
           <select
             id="opr_epr_status"
             onChange={props.onInputChange}
-            defaultValue="not-due"
+            defaultValue="Not Due"
           >
-            <option value="not-due">Not Due</option>
-            <option value="created">Created</option>
-            <option value="routed">Routed</option>
-            <option value="completed">Completed</option>
+            <option value="Not Due">Not Due</option>
+            <option value="Created">Created</option>
+            <option value="Routed">Routed</option>
+            <option value="Completed">Completed</option>
           </select>
         </div>
 
