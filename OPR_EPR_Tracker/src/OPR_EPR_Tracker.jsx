@@ -35,8 +35,10 @@ class OPR_EPR_Tracker extends React.Component {
     fetch(`http://localhost:8080/members/${member_id}`, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
-      .then()
+      .then(this.getData())
       .catch((error) => console.log("error", error));
+    console.log(e.target)
+    
   }
 
   handleFilter(e) {
@@ -55,7 +57,7 @@ class OPR_EPR_Tracker extends React.Component {
       <div>
         <div>
           <select
-            className="form-select"
+            className="custom-select"
             aria-label="Default select example"
             onChange={this.handleFilter.bind(this)}
             defaultValue={"Filter by Status"}
