@@ -20,9 +20,13 @@ The main page greets the user and offers several services. First, the user can a
 
 ### OPR/EPR Tracker - Caden Reynolds
 
-Allows the user to see what the current opr_epr_status of everyone in the unit is. The user has the ability to filter people based on their current opr_epr_status and they can also change the status of anyone in the unit. When a status is changed it sends a patch request to the server to update their opr_epr_status. 
+Allows the user to see what the current opr_epr_status of everyone in the unit is. The user has the ability to filter people based on their current opr_epr_status and they can also change the status of anyone in the unit. When a status is changed it sends a patch request to the server to update their opr_epr_status.
 
 ### Additional Duty Tracker - Emily Hosoya
+
+This service displays a list of additional duties within the unit. Admins can add a new duty title, assign it to an individual, and set its estimated workload. They can also make changes to an existing position.
+
+When an admin assigns a member to a duty, the member's name and rank appear alongside the duty title. Unassigned positions are highlighted in red and can be filtered. Yellow rows signify that this duty has an imminent departing member. These notify the squadron to reassign the responsibility to another member in the immediate future.
 
 ### Navigation Bar
 
@@ -58,3 +62,4 @@ https://www.freecodecamp.org/news/developing-and-deploying-micro-frontends-with-
 https://blog.bitsrc.io/how-to-develop-microfrontends-using-react-step-by-step-guide-47ebb479cacd
 https://devcenter.heroku.com/articles/git#creating-a-heroku-remote
 https://webpack.js.org/loaders/file-loader/
+https://github.com/RameshMF/ReactJS-Spring-Boot-CRUD-Full-Stack-App

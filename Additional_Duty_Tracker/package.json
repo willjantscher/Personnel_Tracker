@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "proxy": "http://localhost:8080",
   "scripts": {
     "test": "cross-env BABEL_ENV=test jest",
     "start": "webpack-dev-server --host 0.0.0.0 --port 9004",

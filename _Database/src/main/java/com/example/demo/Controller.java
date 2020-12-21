@@ -97,7 +97,7 @@ public class Controller {
         return this.additionalDutyRepository.save(additionalDuty);
     }
 
-    @PatchMapping("/duties/{duty_id}")
+    @PutMapping("/duties/{duty_id}")
     public AdditionalDuty editDuty(@RequestBody AdditionalDuty input, @PathVariable Long duty_id) {
         AdditionalDuty editThis = this.additionalDutyRepository.findById(duty_id).get();
         editThis.setTitle(input.getTitle());
