@@ -24,7 +24,7 @@ The main page greets the user and offers several services. First, the user can a
 
 
 ### Navigation Bar
-
+The navigation bar is mounted accross all routes in this application and provides links to the major micro-apps. It also includes the illustrious Team Scorp%co logo.
 
 ### Spring Backend
 This includes a persistant database that boots with mock data. It also contains the appropriate routing and handling of all requests interacting with the database. There are two primary tables with associated classes: a Member table/class and an Additional Duty table/class
