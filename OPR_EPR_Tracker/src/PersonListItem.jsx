@@ -16,7 +16,7 @@ function PersonListItem({ members, onChange, filteredMembers, filter }) {
           className="custom-select"
           onChange={onChange}
           member_id={member.member_id}
-          defaultValue={member.opr_epr_status}
+          value={member.opr_epr_status}
         >
           <option value="not-due">Not Due</option>
           <option value="pending">Pending</option>
