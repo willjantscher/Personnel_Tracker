@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 
-function AddForm(props) {
+function EditForm(props) {
   return (
-    <div className="card">
-      <div className="card-header bg-dark text-light">Add Additional Duty</div>
+    <div className="card mt-2">
+      <div className="card-header bg-dark text-light text-center">
+        Edit Duty
+      </div>
       <div className="card-body">
         <form className="mt-3">
           <div className="mb-3 input-group">
@@ -30,10 +32,9 @@ function AddForm(props) {
               name="member_id"
               className="form-select form-control"
               aria-label="Optional: Select a person to assign"
+              value={props.member_id}
             >
-              <option disabled selected value>
-                Select Member...
-              </option>
+              <option disabled>Select Member...</option>
               {props.members.map((member) => (
                 <option value={member.member_id} key={member.member_id}>
                   {member.last_name}, {member.first_name} {member.paygrade}
@@ -79,4 +80,4 @@ function AddForm(props) {
   );
 }
 
-export default AddForm;
+export default EditForm;
