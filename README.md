@@ -10,7 +10,7 @@ The page will now be accessible at http://localhost:9000/main
 
 
 ### Main Page - Will Jantscher
-
+The main page greets the user and offers several services. First, the user can add a member and specify all of their data. If they are missing a required field, they will get a message to help fill out the form. Once a member is added to the database, they will recieve a "Success!" message. Users can also search for a members information and edit their data. Both of these services update the program database. Finally, a user can generate an Alpha Roster to see the information for all members stored in the database.
 
 ### Inbound/Outbound Tracker - Aria LaFord
 
@@ -25,7 +25,7 @@ The page will now be accessible at http://localhost:9000/main
 
 
 ### Spring Backend
-This includes a persistant database
+This includes a persistant database that boots with mock data. It also contains the appropriate routing and handling of all requests interacting with the database. There are two primary tables with associated classes: a Member table/class and an Additional Duty table/class
 
 ### 
 
