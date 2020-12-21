@@ -35,7 +35,6 @@ class OPR_EPR_Tracker extends React.Component {
     fetch(`http://localhost:8080/members/${member_id}`, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
-      .then(this.getData())
       .catch((error) => console.log("error", error));
     console.log(e.target)
     
